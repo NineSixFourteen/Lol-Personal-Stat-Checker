@@ -1,0 +1,13 @@
+package Lol.Personal.Stats;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class LolPersonalStatsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(LolPersonalStatsApplication.class, args);
+	}
+
+}
