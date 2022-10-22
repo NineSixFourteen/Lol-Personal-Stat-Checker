@@ -1,0 +1,6 @@
+
+Lol-Personal-Stats/src/main/resources/application.properties
+*.class
+Lol-Personal-Stats/target/classes/application.properties
+Lol-Personal-Stats/src/main/java/Lol/Personal/GetInfo.java
+Lol-Personal-Stats/src/main/java/Stats/Helpers/GetInfo.java
