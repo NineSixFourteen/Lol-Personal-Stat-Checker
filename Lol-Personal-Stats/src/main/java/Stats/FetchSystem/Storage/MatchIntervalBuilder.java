@@ -1,5 +1,7 @@
 package Stats.FetchSystem.Storage;
 
+import java.util.ArrayList;
+
 public class MatchIntervalBuilder {
 
     private MatchInterval match10;
@@ -114,5 +116,15 @@ public class MatchIntervalBuilder {
             case 30:match30.setGold(gold);break;
       }
       return this;
+    }
+
+    public ArrayList<MatchInterval> build(){
+        ArrayList<MatchInterval> intervals = new ArrayList<>();
+        intervals.add(match10);
+        intervals.add(match15);
+        intervals.add(match20);
+        intervals.add(match25);
+        intervals.add(match30);
+        return intervals;
     }
 }

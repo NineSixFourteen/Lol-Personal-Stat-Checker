@@ -22,6 +22,13 @@ public class MatchOverallBuilder {
         return this;
     }
 
+    public MatchOverallBuilder setMatch(String Champ, int gold, int CS ){
+        match1.setChampion(Champ);
+        match1.setGold(gold);
+        match1.setCS(gold);
+        return this;
+    }
+
     public MatchOverallBuilder setKDA(int Kills, int Deaths, int Assists){
         match1.setKills(Kills);
         match1.setDeaths(Deaths);
@@ -65,7 +72,7 @@ public class MatchOverallBuilder {
 
     public MatchOverallBuilder setSkillShots(int dodged, int hit, int hitEarly){
         match2.setSkillShotsEarly(hitEarly);
-        match2.setSkillShotsHit(hit);
+        match2.setHitSkillShots(hit);
         match2.setDodgedSkillShots(dodged);
         return this;
     }
@@ -111,7 +118,9 @@ public class MatchOverallBuilder {
         return this;
     }
 
-    public MatchOverallBuilder setkeys(int dPresses, String dKey, int fPresses, String fKey){
+    public MatchOverallBuilder setkeys(int dPresses, int dKeyID, int fPresses, int fKeyID){
+        String dKey = matchSum(dKeyID);
+        String fKey = matchSum(fKeyID);
         match2.setDkeyUses(dPresses);
         match2.setDkey(dKey);
         match2.setFkeyUses(fPresses);
@@ -119,10 +128,20 @@ public class MatchOverallBuilder {
         return this;
     }
 
+    private String matchSum(int KeyID) { //TODO THIS 
+        switch(KeyID){
+            default: return "flash"; 
+        }
+    }
+
     public MatchOverallBuilder setHeal(int heal, int shield){
         match2.setHealOnTeamates(heal);
         match2.setSheildOnTeamates(shield);
         return this;
+    }
+
+    public MatchOverall build(){
+        return new MatchOverall(match1, match2);
     }
 
 

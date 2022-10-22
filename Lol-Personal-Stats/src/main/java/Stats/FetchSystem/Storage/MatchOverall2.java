@@ -22,7 +22,6 @@ public class MatchOverall2 {
     private int peakCsLead;
     private int peakKillDiff;
     private int PicksWAlley;
-    private int SkillShotsHit;
     private int SoloKills;
     private int StealthWardsPlaced;
     private int TurretPlates;
@@ -156,12 +155,6 @@ public class MatchOverall2 {
     }
     public void setPicksWAlley(int picksWAlley) {
         PicksWAlley = picksWAlley;
-    }
-    public int getSkillShotsHit() {
-        return SkillShotsHit;
-    }
-    public void setSkillShotsHit(int skillShotsHit) {
-        SkillShotsHit = skillShotsHit;
     }
     public int getSoloKills() {
         return SoloKills;
