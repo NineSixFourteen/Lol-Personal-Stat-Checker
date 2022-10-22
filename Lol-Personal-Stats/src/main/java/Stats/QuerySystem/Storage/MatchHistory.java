@@ -1,4 +1,4 @@
-package Stats.QuerySystem;
+package Stats.QuerySystem.Storage;
 
 public class MatchHistory {
 
