@@ -1,4 +1,4 @@
-package Stats.QuerySystem.Storage;
+package Stats.FetchSystem.Storage;
 
 public class MatchOverall2 {
 
