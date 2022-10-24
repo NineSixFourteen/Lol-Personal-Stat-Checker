@@ -1,18 +1,27 @@
-package Stats.FetchSystem.Storage;
+package Stats.FetchSystem.Storage.Entitys;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity 
 public class MatchOverall2 {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String MatchId;
-    private String Name; 
+    private String Name;
     private int Pings;
     private int BountyL;
     private int AbiltyUses;
-    private int JungleMonstersKilled;
     private int StolenBuffs;
     private int ControlWardsPlaced;
     private int ControlWardsBought;
     private int DodgedSkillShots;
     private int HitSkillShots;
+    private int JungleMonstersKilled;
     private int EnemyJungleKilled;
     private int EnemyCCd;
     private int timeCCother;

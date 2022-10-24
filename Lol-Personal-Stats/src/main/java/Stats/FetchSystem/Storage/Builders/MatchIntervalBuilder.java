@@ -1,6 +1,8 @@
-package Stats.FetchSystem.Storage;
+package Stats.FetchSystem.Storage.Builders;
 
 import java.util.ArrayList;
+
+import Stats.FetchSystem.Storage.Entitys.MatchInterval;
 
 public class MatchIntervalBuilder {
 
@@ -16,6 +18,20 @@ public class MatchIntervalBuilder {
         match20 = new MatchInterval(20);
         match25 = new MatchInterval(25);
         match30 = new MatchInterval(30);
+    }
+
+    public MatchIntervalBuilder addName(String name, String MatchID){
+        match10.setName(name);
+        match15.setName(name);
+        match20.setName(name);
+        match25.setName(name);
+        match30.setName(name);
+        match10.setMatchID(MatchID);
+        match15.setMatchID(MatchID);
+        match20.setMatchID(MatchID);
+        match25.setMatchID(MatchID);
+        match30.setMatchID(MatchID);
+        return this;
     }
 
     public MatchIntervalBuilder addKill(int timestamp){

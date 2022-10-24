@@ -1,22 +1,41 @@
-package Stats.FetchSystem.Storage;
+package Stats.FetchSystem.Storage.Entitys;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class MatchInterval {
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String name; 
+    private String MatchID;
     private int time; 
-
     private int kills; 
     private int deaths;
     private int assists;
-    
     private int damageDone;
     private int level;
-    private int minions; 
-    private int jungle; 
+    private int minions;
+    private int jungle;
     private int xp;
     private int gold;
 
     public MatchInterval(int time) {
         this.time = time;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getMatchID() {
+        return MatchID;
+    }
+    public void setMatchID(String matchID) {
+        MatchID = matchID;
     }
     public int getTime() {
         return time;

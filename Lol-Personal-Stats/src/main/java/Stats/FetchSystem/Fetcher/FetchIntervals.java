@@ -1,28 +1,19 @@
 package Stats.FetchSystem.Fetcher;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import com.fasterxml.jackson.core.PrettyPrinter;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import Stats.FetchSystem.QueryTest;
-import Stats.FetchSystem.Storage.MatchInterval;
-import Stats.FetchSystem.Storage.MatchIntervalBuilder;
-import Stats.PrettyPrinters.PrettyFetch;
+import Stats.FetchSystem.Storage.Builders.MatchIntervalBuilder;
+import Stats.FetchSystem.Storage.Entitys.MatchInterval;
 
 public class FetchIntervals {
 
-    public static void main(String[] args) throws IOException {
-        JsonNode node = QueryTest.getTimeLine();
-        ArrayList<ArrayList<MatchInterval>> x = getIntervals(node);
-        PrettyFetch.prettyPlayerInterval(x.get(0)); 
-    }
 
-    public static ArrayList<ArrayList<MatchInterval>> getIntervals(JsonNode node){
+    public static ArrayList<ArrayList<MatchInterval>> getIntervals(JsonNode node,String MatchID,ArrayList<String> names){
         ArrayList<MatchIntervalBuilder> builders = new ArrayList<>();
         for(int i =0; i< 10; i++){
-            builders.add(new MatchIntervalBuilder());
+            builders.add(new MatchIntervalBuilder().addName(names.get(i), MatchID));
         }
         int i = 0;
         JsonNode temp;
@@ -38,9 +29,9 @@ public class FetchIntervals {
             }
             for(JsonNode event : nde.get("events")){
                 if((event.get("type").asText().equals("CHAMPION_KILL"))){
-                    System.out.println(event.get("timestamp"));
-                    System.out.println(event.get("killerId").asInt() - 1);
-                    builders.get(event.get("killerId").asInt() -1 ).addKill(event.get("timestamp").asInt());
+                    if(event.get("killerId").asInt() > 0){
+                        builders.get(event.get("killerId").asInt() -1 ).addKill(event.get("timestamp").asInt());
+                    }
                     builders.get(event.get("victimId").asInt() -1 ).addDeaths(event.get("timestamp").asInt());
                     if(event.get("assistingParticipantIds") != null){
                         for(JsonNode assist : event.get("assistingParticipantIds")){

@@ -4,3 +4,5 @@ Lol-Personal-Stats/src/main/resources/application.properties
 Lol-Personal-Stats/target/classes/application.properties
 Lol-Personal-Stats/src/main/java/Lol/Personal/GetInfo.java
 Lol-Personal-Stats/src/main/java/Stats/Helpers/GetInfo.java
+Lol-Personal-Stats/src/main/resources/hibernate.cfg.xml
+Lol-Personal-Stats/target/classes/hibernate.cfg.xml

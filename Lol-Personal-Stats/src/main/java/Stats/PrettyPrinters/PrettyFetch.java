@@ -1,9 +1,9 @@
 package Stats.PrettyPrinters;
 
-import Stats.FetchSystem.Storage.MatchHistory;
-import Stats.FetchSystem.Storage.MatchInterval;
-import Stats.FetchSystem.Storage.MatchOverall1;
-import Stats.FetchSystem.Storage.MatchOverall2;
+import Stats.FetchSystem.Storage.Entitys.MatchHistory;
+import Stats.FetchSystem.Storage.Entitys.MatchInterval;
+import Stats.FetchSystem.Storage.Entitys.MatchOverall1;
+import Stats.FetchSystem.Storage.Entitys.MatchOverall2;
 
 import java.util.ArrayList;
 
@@ -26,22 +26,13 @@ public class PrettyFetch {
         System.out.println("Gamemode : " + mh.getGameMode());
         System.out.println("Date : " + mh.getDate());
         System.out.println("Game Length : " + mh.getGameLength());
-        String[] pos = new String[]{"Top", "Jgl", "Mid","Adc","Sup"};
-        System.out.println("Blue:");
-        int i = 0; 
-        for(String player : mh.getBlue()){
-            System.out.println(pos[i++] + ": " + player);
-        }
-        System.out.println("Red:");
-        i = 0; 
-        for(String player : mh.getRed()){
-            System.out.println(pos[i++] + ": " + player);
-        }
+        System.out.println("Winner: " + mh.getWinningTeam());
     }
 
     public static void prettyPlayer1(MatchOverall1 m1){
         System.out.println("Match ID : "         + m1.getMatchID()         );
         System.out.println("Name : "             + m1.getName()            );
+        System.out.println("Position : "         + m1.getPosition()        );
         System.out.println("Kills : "            + m1.getKills()           );
         System.out.println("Deaths : "           + m1.getDeaths()          );
         System.out.println("Assists : "          + m1.getAssists()         );

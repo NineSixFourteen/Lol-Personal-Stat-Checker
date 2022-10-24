@@ -1,7 +1,8 @@
-package Stats.FetchSystem.Storage;
+package Stats.FetchSystem.Storage.Builders;
 
 import java.time.LocalDate;
-import java.util.List;
+
+import Stats.FetchSystem.Storage.Entitys.MatchHistory;
 
 public class MatchHistoryBuilder {
 
@@ -42,7 +43,8 @@ public class MatchHistoryBuilder {
         String mes = "";
         mes += (seconds / 60);
         mes += ':';
-        mes += seconds%60;
+        seconds %= 60;
+        mes += seconds > 9 ? seconds : "0" + seconds ;
         mh.setGameLength(mes);
         return this;
     }
@@ -53,12 +55,6 @@ public class MatchHistoryBuilder {
         return this;
     }
     
-    public MatchHistoryBuilder setTeams(List<String> blue,List<String> red ){
-        mh.setBlue(blue);
-        mh.setRed(red);
-        return this;
-    }
-
     public MatchHistory build(){
         return mh;
     }

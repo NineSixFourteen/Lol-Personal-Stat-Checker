@@ -1,11 +1,22 @@
-package Stats.FetchSystem.Storage;
+package Stats.FetchSystem.Storage.Entitys;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 //Match Overall Important
+@Entity
 public class MatchOverall1 {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String MatchID;
     private String Name; 
     private String Champion;
+    private String Position; 
+    private String team;
     private int Kills;
     private int Deaths;
     private int Assists;
@@ -21,8 +32,19 @@ public class MatchOverall1 {
     private int BaronsTaken;
     private int ObjectiveSteals;
     private int VisionScore;
-    
     public MatchOverall1() {
+    }
+    public String getTeam() {
+        return team;
+    }
+    public void setTeam(String team) {
+        this.team = team;
+    }
+    public String getPosition() {
+        return Position;
+    }
+    public void setPosition(String position) {
+        Position = position;
     }
     public String getMatchID() {
         return MatchID;

@@ -1,4 +1,8 @@
-package Stats.FetchSystem.Storage;
+package Stats.FetchSystem.Storage.Builders;
+
+import Stats.FetchSystem.Storage.Entitys.MatchOverall1;
+import Stats.FetchSystem.Storage.Entitys.MatchOverall2;
+import Stats.FetchSystem.Storage.Other.MatchOverall;
 
 public class MatchOverallBuilder {
 
@@ -22,10 +26,20 @@ public class MatchOverallBuilder {
         return this;
     }
 
+    public MatchOverallBuilder setPosition(String pos, int team){
+        match1.setPosition(pos);
+        if(team == 100){
+            match1.setTeam("Blue");
+        } else {
+            match1.setTeam("Red");
+        }
+        return this;
+    }
+
     public MatchOverallBuilder setMatch(String Champ, int gold, int CS ){
         match1.setChampion(Champ);
         match1.setGold(gold);
-        match1.setCS(gold);
+        match1.setCS(CS);
         return this;
     }
 

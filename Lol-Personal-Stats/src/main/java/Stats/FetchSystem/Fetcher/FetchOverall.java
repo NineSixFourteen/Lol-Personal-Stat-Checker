@@ -4,15 +4,14 @@ import java.util.ArrayList;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import Stats.FetchSystem.Storage.MatchOverall;
-import Stats.FetchSystem.Storage.MatchOverallBuilder;
+import Stats.FetchSystem.Storage.Builders.MatchOverallBuilder;
+import Stats.FetchSystem.Storage.Other.MatchOverall;
 
 public class FetchOverall {
 
     public static ArrayList<MatchOverall> getPlayers(JsonNode node){
         ArrayList<MatchOverall> players = new ArrayList<>();
         String matchId = node.get("metadata").get("matchId").asText();
-        //System.out.println(node.get("info"));
         for(JsonNode nde : node.get("info").get("participants")){
             players.add(getPlayer(nde,matchId));
         }
@@ -27,14 +26,23 @@ public class FetchOverall {
             node.get("deaths").asInt(),
             node.get("assists").asInt()
         ).setID(id)
+          .setMatch(
+            node.get("championName").asText(), 
+            node.get("goldEarned").asInt(),
+            node.get("totalMinionsKilled").asInt() + node.get("neutralMinionsKilled").asInt())
          .setName(node.get("summonerName").asText())
+         .setPosition(
+            !node.get("teamPosition").asText().equals("UTILITY") 
+            ? node.get("teamPosition").asText() 
+            :  "SUPPORT"
+            ,node.get("teamId").asInt())
          .setVision(
             node.get("wardsPlaced").asInt(),
             node.get("wardsKilled").asInt(), 
             node.get("visionScore").asInt()
         ).setObjectives(
-            node.get("dragonKills").asInt(), 
-            node.get("baronKills").asInt(), 
+            chal.get("dragonTakedowns").asInt(), 
+            chal.get("baronTakedowns").asInt(), 
             node.get("objectivesStolen").asInt()
         ).setDamage(
             node.get("totalDamageDealtToChampions").asInt(), 
@@ -43,7 +51,7 @@ public class FetchOverall {
             node.get("damageDealtToTurrets").asInt(), 
             node.get("turretKills").asInt(), chal.get("turretPlatesTaken").asInt()
         ).setJungle(
-            chal.get("alliedJungleMonsterKills").asInt(), 
+            node.get("neutralMinionsKilled").asInt(), 
             chal.get("enemyJungleMonsterKills").asInt(), 
             chal.get("buffsStolen").asInt()
         ).setSkillShots(

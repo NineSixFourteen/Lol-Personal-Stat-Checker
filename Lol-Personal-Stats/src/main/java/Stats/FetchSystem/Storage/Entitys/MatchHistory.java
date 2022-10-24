@@ -1,20 +1,24 @@
-package Stats.FetchSystem.Storage;
+package Stats.FetchSystem.Storage.Entitys;
 
-import java.util.List;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
 public class MatchHistory {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     private String MatchID; 
     private String GameMode; 
     private String WinningTeam;
     private String GameLength;
-    private String Date;
-    private List<String> blue;
-    private List<String> red;
-    
 
+    private String Date;
+    
     public MatchHistory() {
     }
+
     public String getMatchID() {
         return MatchID;
     }
@@ -45,18 +49,5 @@ public class MatchHistory {
     public void setDate(String date) {
         Date = date;
     }
-    public List<String> getBlue() {
-        return blue;
-    }
-    public void setBlue(List<String> blue) {
-        this.blue = blue;
-    }
-    public List<String> getRed() {
-        return red;
-    }
-    public void setRed(List<String> red) {
-        this.red = red;
-    }
-    
 
 }

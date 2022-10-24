@@ -1,4 +1,7 @@
-package Stats.FetchSystem.Storage;
+package Stats.FetchSystem.Storage.Other;
+
+import Stats.FetchSystem.Storage.Entitys.MatchOverall1;
+import Stats.FetchSystem.Storage.Entitys.MatchOverall2;
 
 public class MatchOverall {
 
