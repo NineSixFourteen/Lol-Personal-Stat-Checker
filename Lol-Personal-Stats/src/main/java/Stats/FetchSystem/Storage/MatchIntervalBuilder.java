@@ -19,45 +19,45 @@ public class MatchIntervalBuilder {
     }
 
     public MatchIntervalBuilder addKill(int timestamp){
-        if(timestamp < 66000){
+        if(timestamp < 600000){
             match10.addKill();match15.addKill();match20.addKill();match25.addKill(); match30.addKill();
-        } else if(timestamp < 96000){
+        } else if(timestamp < 900000){
             match15.addKill();match20.addKill();match25.addKill();match30.addKill();
-        } else if(timestamp < 126000){
+        } else if(timestamp < 1200000){
             match20.addKill();match25.addKill();match30.addKill();
-        } else if(timestamp < 156000){
+        } else if(timestamp < 1500000){
             match25.addKill();match30.addKill();
-        } else if(timestamp < 186000){
+        } else if(timestamp < 1800000){
             match30.addKill();
         }
         return this;
     }
 
     public MatchIntervalBuilder addDeaths(int timestamp){
-        if(timestamp < 66000){
+        if(timestamp < 600000){
             match10.addDeaths();match15.addDeaths();match20.addDeaths();match25.addDeaths(); match30.addDeaths();
-        } else if(timestamp < 96000){
+        } else if(timestamp < 900000){
             match15.addDeaths();match20.addDeaths();match25.addDeaths();match30.addDeaths();
-        } else if(timestamp < 126000){
+        } else if(timestamp < 1200000){
             match20.addDeaths();match25.addDeaths();match30.addDeaths();
-        } else if(timestamp < 156000){
+        } else if(timestamp < 1500000){
             match25.addDeaths();match30.addDeaths();
-        } else if(timestamp < 186000){
+        } else if(timestamp < 1800000){
             match30.addDeaths();
         }
         return this;
     }
 
     public MatchIntervalBuilder addAssits(int timestamp){
-        if(timestamp < 66000){
+        if(timestamp < 600000){
             match10.addAssists();match15.addAssists();match20.addAssists();match25.addAssists();match30.addAssists();
-        } else if(timestamp < 96000){
+        } else if(timestamp < 900000){
             match15.addAssists();match20.addAssists();match25.addAssists();match30.addAssists();
-        } else if(timestamp < 126000){
+        } else if(timestamp < 1200000){
             match20.addAssists();match25.addAssists();match30.addAssists();
-        } else if(timestamp < 156000){
+        } else if(timestamp < 1500000){
             match25.addAssists();match30.addAssists();
-        } else if(timestamp < 186000){
+        } else if(timestamp < 1800000){
             match30.addAssists();
         }
         return this;
@@ -92,6 +92,16 @@ public class MatchIntervalBuilder {
             case 20:match20.setMinions(minions);break;
             case 25:match25.setMinions(minions);break;
             case 30:match30.setMinions(minions);break;
+      }
+      return this;
+    }
+    public MatchIntervalBuilder setJungle(int num , int jungle){
+        switch(num){
+            case 10:match10.setJungle(jungle);break;
+            case 15:match15.setJungle(jungle);break;
+            case 20:match20.setJungle(jungle);break;
+            case 25:match25.setJungle(jungle);break;
+            case 30:match30.setJungle(jungle);break;
       }
       return this;
     }

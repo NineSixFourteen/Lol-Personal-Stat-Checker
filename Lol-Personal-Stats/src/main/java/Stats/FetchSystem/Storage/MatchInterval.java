@@ -11,6 +11,7 @@ public class MatchInterval {
     private int damageDone;
     private int level;
     private int minions; 
+    private int jungle; 
     private int xp;
     private int gold;
 
@@ -67,6 +68,12 @@ public class MatchInterval {
     }
     public void setGold(int gold) {
         this.gold = gold;
+    }
+    public int getJungle() {
+        return jungle;
+    }
+    public void setJungle(int jungle) {
+        this.jungle = jungle;
     }
     
 }

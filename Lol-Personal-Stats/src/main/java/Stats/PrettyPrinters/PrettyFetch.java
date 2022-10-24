@@ -1,8 +1,12 @@
 package Stats.PrettyPrinters;
 
 import Stats.FetchSystem.Storage.MatchHistory;
+import Stats.FetchSystem.Storage.MatchInterval;
 import Stats.FetchSystem.Storage.MatchOverall1;
 import Stats.FetchSystem.Storage.MatchOverall2;
+
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import Stats.FetchSystem.Fetcher.FetchOverall;
 import Stats.FetchSystem.Fetcher.Fetcher;
@@ -88,5 +92,23 @@ public class PrettyFetch {
         System.out.println("F Key Uses : "               + m2.getFkeyUses()             );
         System.out.println("Amount Heal : "              + m2.getHealOnTeamates()       );
         System.out.println("Amount Shield : "            + m2.getSheildOnTeamates()     );
+    }
+
+
+    public static void prettyPlayerInterval(ArrayList<MatchInterval> arrayList) {
+        for(int i = 0; i < arrayList.size();i++){
+            MatchInterval match = arrayList.get(i);
+            System.out.println("I : "  + i);
+            System.out.println("Kills : "    + match.getKills());
+            System.out.println("Deaths : "   + match.getDeaths());
+            System.out.println("Gold : "     + match.getGold());
+            System.out.println("Minions : "  + match.getMinions());
+            System.out.println("Jungle : "   + match.getJungle());
+            System.out.println("Assists : "        + match.getAssists());
+            System.out.println("Damage Done : "    + match.getDamageDone());
+            System.out.println("Level : "  + match.getLevel());
+            System.out.println("Xp : "  + match.getXp());
+            
+        }
     }
 }
