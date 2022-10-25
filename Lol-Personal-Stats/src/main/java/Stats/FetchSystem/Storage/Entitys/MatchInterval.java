@@ -3,8 +3,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "MatchInterval.findByMatchID",
+  query = "select h from MatchInterval h where h.MatchID = ?1")
+@NamedQuery(name = "MatchInterval.findByMatchIDAndName",
+  query = "select h from MatchInterval h where h.MatchID = ?1 AND h.name =?2")
 public class MatchInterval {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +26,9 @@ public class MatchInterval {
     private int jungle;
     private int xp;
     private int gold;
+
+    public MatchInterval() {
+    }
 
     public MatchInterval(int time) {
         this.time = time;

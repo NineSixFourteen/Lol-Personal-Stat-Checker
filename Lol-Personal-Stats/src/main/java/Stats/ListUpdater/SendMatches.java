@@ -22,7 +22,7 @@ public class SendMatches {
         }
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         for(int i = 50; i < matches.size();i++){
-            writer.write(matches.get(i));
+            writer.write(matches.get(i) + "\n");
         }
         writer.close();
     }

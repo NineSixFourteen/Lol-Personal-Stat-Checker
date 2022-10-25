@@ -20,6 +20,7 @@ public class FetchOverall {
 
     public static MatchOverall getPlayer(JsonNode node,String id){
         MatchOverallBuilder mob = new MatchOverallBuilder();
+        System.out.println(node);
         JsonNode chal = node.get("challenges");
         mob.setKDA(
             node.get("kills").asInt(), 
@@ -59,7 +60,7 @@ public class FetchOverall {
             chal.get("skillshotsHit").asInt(),
             chal.get("landSkillShotsEarlyGame").asInt()
         ).setCS(
-            chal.get("maxCsAdvantageOnLaneOpponent").asInt(), 
+            chal.get("maxCsAdvantageOnLaneOpponent") != null ?  chal.get("maxCsAdvantageOnLaneOpponent").asInt() : 0,
             chal.get("laneMinionsFirst10Minutes").asInt()
         ).setKills(
             chal.get("maxKillDeficit").asInt(), 
@@ -71,7 +72,7 @@ public class FetchOverall {
             chal.get("controlWardsPlaced").asInt(), 
             chal.get("stealthWardsPlaced").asInt()
         ).setOthers(
-            node.get("basicPings").asInt(),
+            node.get("basicPings") != null ? node.get("basicPings").asInt(): 0 ,
             node.get("bountyLevel").asInt(), 
             chal.get("abilityUses").asInt()
         ).setCC(

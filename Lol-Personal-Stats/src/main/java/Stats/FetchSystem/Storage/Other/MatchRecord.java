@@ -10,6 +10,7 @@ public class MatchRecord {
     MatchHistory matchHistory; 
     ArrayList<MatchOverall> overals;
     ArrayList<ArrayList<MatchInterval>> intervals;
+    
     public MatchRecord(MatchHistory matchHistory, ArrayList<MatchOverall> overals,
             ArrayList<ArrayList<MatchInterval>> intervals) {
         this.matchHistory = matchHistory;

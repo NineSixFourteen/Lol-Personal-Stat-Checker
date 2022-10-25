@@ -4,8 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity 
+@NamedQuery(name = "MatchOverall2.findByMatchIDAndName",
+  query = "select h from MatchOverall2 h where h.MatchId = ?1 AND h.Name =?2")
+@NamedQuery(name = "MatchOverall2.findByMatchID",
+  query = "select h from MatchOverall2 h where h.MatchId = ?1")
 public class MatchOverall2 {
 
     @Id
