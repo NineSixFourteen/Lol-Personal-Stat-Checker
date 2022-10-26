@@ -6,6 +6,7 @@ import Stats.FetchSystem.Storage.Entitys.MatchOverall1;
 import Stats.FetchSystem.Storage.Entitys.MatchOverall2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import Stats.FetchSystem.Fetcher.FetchOverall;
@@ -86,7 +87,7 @@ public class PrettyFetch {
     }
 
 
-    public static void prettyPlayerInterval(ArrayList<MatchInterval> arrayList) {
+    public static void prettyPlayerInterval(List<MatchInterval> arrayList) {
         for(int i = 0; i < arrayList.size();i++){
             MatchInterval match = arrayList.get(i);
             System.out.println("I : "  + i);

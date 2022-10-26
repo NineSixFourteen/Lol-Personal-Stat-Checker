@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 @Entity
 @NamedQuery(name = "MatchHistory.findByMatchID",
-  query = "select h from MatchHistory h where h.MatchID = ?1")
+  query = "select h from MatchHistory h where h.MatchID = ?1 ")
 public class MatchHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SendMatches {
 
@@ -15,16 +17,41 @@ public class SendMatches {
     private static String fileName = ("C:\\Users\\aidan\\Documents\\GitHub\\Lol-Personal-Stat-Checker\\Lol-Personal-Stats\\src\\main\\java\\Stats\\ListUpdater\\output.txt");
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        ArrayList<String> matches = getMatchList();
-        for(int i = 0; i < 50;i++ ){
-            SendMatch(matches.get(i)); // can only do 50 then stops 
-            Thread.sleep(500);
+        sendDelete(
+        new Integer[]{36515,36517,36519,36521,36523,36525,36527,36529,36531,36533},
+        new Integer[]{36516,36518,36520,36522,36524,36526,36528,36530,36532,36534}
+        );
+    }
+
+    private static void sendDelete(Integer[] ov1, Integer[] ov2) throws IOException{
+        String command  = "curl localhost:8080/delete/ov1 -d id=";
+        String command2 = "curl localhost:8080/delete/ov2 -d id=";
+        for(Integer o1 : ov1){
+            ProcessBuilder processBuilder = new ProcessBuilder((command + o1).split(" "));
+            processBuilder.directory(new File("C:\\Users\\aidan\\"));
+            Process process = processBuilder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String line = null;
+            while ( (line = reader.readLine()) != null) {
+                builder.append(line);
+                builder.append(System.getProperty("line.separator"));
+            }
+            System.out.println(builder.toString());
         }
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        for(int i = 50; i < matches.size();i++){
-            writer.write(matches.get(i) + "\n");
+        for(Integer o2 : ov2){
+            ProcessBuilder processBuilder = new ProcessBuilder((command2 + o2).split(" "));
+            Process process = processBuilder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String line = null;
+            while ( (line = reader.readLine()) != null) {
+                builder.append(line);
+                builder.append(System.getProperty("line.separator"));
+            }
+            System.out.println(builder.toString());
         }
-        writer.close();
+        
     }
 
     private static void SendMatch(String match) {

@@ -11,4 +11,5 @@ import Stats.FetchSystem.Storage.Entitys.MatchOverall2;
 public interface MatchOverall2Respository extends  CrudRepository<MatchOverall2,Integer> {
     List<MatchOverall2> findByMatchIDAndName(String Matchid, String name);
     List<MatchOverall2> findByMatchID(String id);
+    List<MatchOverall2> findByName(String name);
 }

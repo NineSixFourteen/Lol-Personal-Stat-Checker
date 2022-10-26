@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Stats.FetchSystem.Helpers.GetInfo;
+import Stats.FetchSystem.Helpers.Helper;
 import Stats.FetchSystem.Storage.Entitys.MatchHistory;
 import Stats.FetchSystem.Storage.Entitys.MatchInterval;
 import Stats.FetchSystem.Storage.Other.MatchOverall;
 import Stats.FetchSystem.Storage.Other.MatchRecord;
-import Stats.Helpers.GetInfo;
-import Stats.Helpers.Helper;
 import Stats.PrettyPrinters.PrettyFetch;
 
 public class Fetcher {
@@ -24,8 +24,8 @@ public class Fetcher {
     public static void main(String[] args) {
         MatchRecord mr = getMatchRecord("EUW1_6026976100");
         PrettyFetch.prettyMatchHistory(mr.getMatchHistory());
-        PrettyFetch.prettyPlayer1(mr.getOverals().get(1).getMatch1());
-        PrettyFetch.prettyPlayerInterval(mr.getIntervals().get(4));
+        PrettyFetch.prettyPlayer1(mr.getPlayers().get(1).getMo().getMatch1());
+        PrettyFetch.prettyPlayerInterval(mr.getPlayers().get(0).getIntervals());
     }
 
     public static MatchRecord getMatchRecord(String matchID){

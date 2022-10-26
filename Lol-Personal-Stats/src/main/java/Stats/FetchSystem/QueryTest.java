@@ -10,8 +10,8 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-import Stats.Helpers.GetInfo;
-import Stats.Helpers.Helper;
+import Stats.FetchSystem.Helpers.GetInfo;
+import Stats.FetchSystem.Helpers.Helper;
 
 
 public class QueryTest {
