@@ -298,7 +298,7 @@ public class AverageMatch {
 
     public AverageMatch build(){
         return new AverageMatch(
-            1,
+            total,
             kills / total,
             deaths / total, 
             assists / total, 

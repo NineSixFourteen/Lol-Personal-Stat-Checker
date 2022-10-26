@@ -14,6 +14,10 @@ import javax.persistence.NamedQuery;
   query = "select h from MatchOverall1 h where h.Name = ?1")
 @NamedQuery(name = "MatchOverall1.findByChampion",
   query = "select h from MatchOverall1 h where h.Champion = ?1")
+@NamedQuery(name = "MatchOverall1.findByPosition",
+  query = "select h from MatchOverall1 h where h.Position = ?1")
+@NamedQuery(name = "MatchOverall1.findByPositonAndName",
+  query = "select h from MatchOverall1 h where h.Position = ?1 AND h.Name =?2" )
 @NamedQuery(name = "MatchOverall1.findByMatchIDAndName",
   query = "select h from MatchOverall1 h where h.MatchID = ?1 AND h.Name =?2")
 public class MatchOverall1 {

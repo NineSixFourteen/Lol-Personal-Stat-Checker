@@ -12,4 +12,6 @@ public interface MatchOverall1Respository extends CrudRepository<MatchOverall1,I
     List<MatchOverall1> findByMatchID(String id);
     List<MatchOverall1> findByName(String name);
     List<MatchOverall1> findByChampion(String name);
+    List<MatchOverall1> findByPosition(String name);
+    List<MatchOverall1> findByPositonAndName(String pos, String name);
 }
