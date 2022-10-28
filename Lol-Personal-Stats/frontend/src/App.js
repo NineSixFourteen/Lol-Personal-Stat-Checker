@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 
-class App extends React.Component {
+class Other extends React.Component {
   state = {
     players: []
   };
@@ -33,4 +33,4 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+export default Other;
