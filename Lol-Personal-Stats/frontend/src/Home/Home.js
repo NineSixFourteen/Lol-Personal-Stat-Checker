@@ -14,14 +14,37 @@ import "bootstrap/dist/css/bootstrap.min.css"
 class App extends React.Component {
 
 state = {
-    text: 'hidden'
-}
+    text: (
+        <span style={{fontSize:'130%'}}>
+        This site was made to add a front end to the api I built using Java Spring and MySql. <br></br>
+        The MYSQL database I am using have information stored about my League Of Legends games 
+        I split the information for each game into 4 Tables to see what each table stores see &nbsp; 
+        <a href = "https://github.com/NineSixFourteen/Lol-Personal-Stat-Checker/tree/main/Lol-Personal-Stats/src/main/java/Stats/FetchSystem/Storage/Entitys">
+        the classes</a> that corresponds to each table<br></br>
+        If you wish to look at the source code of the project &nbsp; 
+        <a href="https://github.com/NineSixFourteen/Lol-Personal-Stat-Checker/">Click Here</a> <br></br>
+        </span>
+    ),
+    size : '100%',
+    }
     
-changeText = (text) => {
-    this.setState({ text }); 
+changeText = (text,size, colour) => {
+    this.setState({ text,size}); 
 } 
 
-render() { 
+render() {
+    const nothing = (<><br></br> <br></br><br></br> <br></br> </>);
+    const something =  (
+    <span style={{fontSize:'130%'}}>
+        This site was made to add a front end to the api I built using Java Spring and MySql. <br></br>
+        The MYSQL database I am using have information stored about my League Of Legends games 
+        I split the information for each game into 4 Tables to see what each table stores see &nbsp; 
+        <a href = "https://github.com/NineSixFourteen/Lol-Personal-Stat-Checker/tree/main/Lol-Personal-Stats/src/main/java/Stats/FetchSystem/Storage/Entitys">
+        the classes</a> that corresponds to each table<br></br>
+        If you wish to look at the source code of the project &nbsp; 
+        <a href="https://github.com/NineSixFourteen/Lol-Personal-Stat-Checker/">Click Here</a> <br></br>
+        </span>
+    );
     return (
         <div className="App">
           <header >
@@ -34,7 +57,7 @@ render() {
             />
             <Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Nav style={{marginLeft:'27%'}}>
+                <Nav style={{marginLeft:'25%'}}>
                     <Nav.Link style={{color:'Violet', fontWeight:'300'}} href="#home"><h2>Overall</h2></Nav.Link>
                     <Nav.Link style={{color:'Violet', fontWeight:'300'}} href="#features"><h2>Match</h2></Nav.Link>
                     <Nav.Link style={{color:'Violet', fontWeight:'300'}} href="#pricing"><h2>Player</h2></Nav.Link>
@@ -43,19 +66,19 @@ render() {
             </Navbar>
             <Container fluid>
             <Row className = "px-4 my-5"> 
-                <Card style ={{width:'15%'}} border='warning'>
+                <Card style={{width:this.state.size}}border='warning'>
                     <Card.Header border='dark'><span style={{fontSize:'150%',fontWeight:'700'}}> About This Site </span>
                     <Nav variant="tabs" defaultActiveKey="#first">
                         <Nav.Item>
-                            <Nav.Link onClick={()=> {this.changeText('visible')}}>Show</Nav.Link>
+                            <Nav.Link onClick={()=>this.changeText(something,'100%')}>Show</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link onClick={()=> {this.changeText('hidden')}}>Hide</Nav.Link>
+                            <Nav.Link onClick={()=>this.changeText(nothing,'15%')}>Hide</Nav.Link>
                         </Nav.Item>
                         </Nav>
                     </Card.Header>
-                    <Card.Body style={{visibility:this.state.text}}>
-
+                    <Card.Body> 
+                        {this.state.text}
                     </Card.Body>
                 </Card>
             </Row>
@@ -65,16 +88,16 @@ render() {
                     <Card.Img variant="top" src={overall} />
                     <Card.Body>
                     <Card.Title><h2>Overall Stats</h2></Card.Title>
-                    <Card.Text>
-                    <span style={{ fontWeight: '500', fontSize: '130%' }}>
-                        The Overall Stats Page allows you to <br></br>
-                        - Shows The Overall Stats For Every Record <br></br>
-                        - Shows The Overall Stats For Every Position  <br></br>
-                        - Shows The Overall Stats For Every Gamemode <br></br>
-                        - Shows The Average Stats For Every Position <br></br>
-                        - Shows The Average Stats For Every Gamemode<br></br>
-                        </span>
-                    </Card.Text>
+                        <Card.Text>
+                        <span style={{ fontWeight: '500', fontSize: '130%' }}>
+                            The Overall Stats Page allows you to <br></br>
+                            - Shows The Overall Stats For Every Record <br></br>
+                            - Shows The Overall Stats For Every Position  <br></br>
+                            - Shows The Overall Stats For Every Gamemode <br></br>
+                            - Shows The Average Stats For Every Position <br></br>
+                            - Shows The Average Stats For Every Gamemode<br></br>
+                            </span>
+                        </Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
