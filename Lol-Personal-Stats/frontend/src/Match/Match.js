@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import logo from '../logo.png';
-import grey from './grey.png';
+import Stats from './Stats';
 import './match.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import PlayerTop from './PlayerTop';
@@ -21,7 +21,10 @@ class Match extends React.Component {
             id2: "",
             matchHistroy: null,
             players: ["","","","",""],
-            row: []
+            row: [],
+            tabs: null,
+            current: 0,
+            stats: null
           };
       }
 
@@ -31,6 +34,7 @@ class Match extends React.Component {
         const body = await response.json();
         this.setState({id2:this.state.id ,matchHistroy: body.matchHistroy, players: body.players})
         this.makeBody(body.players)
+        this.makeStats(body.players,1)
     }
 
     makeBody(players){
@@ -51,7 +55,20 @@ class Match extends React.Component {
                 })
         this.setState({row : x})
     }
-    
+
+    makeStats(players){
+        this.setState({stats : (
+            <Row>
+                <Col>
+                <Stats players={players}></Stats>
+                </Col>
+                <Col>
+                <Stats players={players}></Stats>
+                </Col>
+            </Row>
+        )})
+    }
+
     render() {
         const players = this.state.players;
         console.log(players)
@@ -90,7 +107,7 @@ class Match extends React.Component {
                                  onChange={e => this.setState({ id: e.target.value })}
                                 />
                                 <Form.Text className="text-muted">
-                                    Example : EUW1_6115488981
+                                    Example : EUW1_6115488981 + {this.state.cur}
                                 </Form.Text>
                             </Form.Group>
                         </Form>
@@ -104,13 +121,18 @@ class Match extends React.Component {
                     </Card>
                 </Row>
                 <Row>
-                    <Container >
-                        <Card style={{backgroundColor:"rgba(200,200,200,0.5)"}}>
-                            <Card.Body>
-                                {this.state.row}  
-                            </Card.Body>   
-                        </Card>   
-                    </Container>
+                    <Card style={{backgroundColor:"rgba(200,200,200,0.5)"}}>
+                        <Card.Body>
+                            {this.state.row}  
+                        </Card.Body>   
+                    </Card>   
+                </Row>
+                <Row className = "my-5"> 
+                    <Card style={{backgroundColor:"rgba(200,200,200,0.5)"}}>
+                        <Card.Body>
+                        {this.state.stats}
+                        </Card.Body>   
+                    </Card>   
                 </Row>
             </Container>
             </header></div>
