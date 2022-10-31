@@ -8,6 +8,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import logo from '../logo.png';
+import grey from './grey.png';
+import './match.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import PlayerTop from './PlayerTop';
 
@@ -24,6 +26,7 @@ class Match extends React.Component {
       }
 
     async getMatch(id) {
+        this.setState({id:"",id2:"",mathHistory:null,players:[],row:[]})
         const response = await fetch('/get/Match?id=' + id);
         const body = await response.json();
         this.setState({id2:this.state.id ,matchHistroy: body.matchHistroy, players: body.players})
@@ -36,8 +39,8 @@ class Match extends React.Component {
         foo.map(e => {
             x[e] = 
                     (
-                        <Row>
-                            <Col>
+                        <Row className = "my-1" >
+                            <Col className = "">
                                 <PlayerTop player={players[e]}></PlayerTop>
                             </Col>
                             <Col>
@@ -101,16 +104,13 @@ class Match extends React.Component {
                     </Card>
                 </Row>
                 <Row>
-                    <Card>
-                        <Card.Header>
-                            {this.state.id2}
-                        </Card.Header>
-                        <Card.Body>
-                            <Container fluid>
-                                {this.state.row}                    
-                            </Container>
-                        </Card.Body>
-                    </Card>
+                    <Container >
+                        <Card style={{backgroundColor:"rgba(200,200,200,0.5)"}}>
+                            <Card.Body>
+                                {this.state.row}  
+                            </Card.Body>   
+                        </Card>   
+                    </Container>
                 </Row>
             </Container>
             </header></div>
