@@ -25,10 +25,8 @@ class Stats extends React.Component{
         this.getTabs(this.state.players);
     }
 
-    setCur(players, name){
-        const ind = this.findName(players,name);
-        console.log(ind);
-        this.setPlayer(players[ind])
+    setCur(player){
+        this.setPlayer(player)
     }
 
     findName(players, name){
@@ -80,7 +78,7 @@ class Stats extends React.Component{
                     </Col>
                     <Col>
                     <strong>Stats - Fun </strong><br></br>
-                    <strong>Ability Uses : </strong>{match2.abilityUses} <br></br>
+                    <strong>Ability Uses : </strong>{match2.abiltyUses} <br></br>
                     <strong>Bounty Level :</strong> {match2.bountyL} <br></br>
                     <strong>CC And Kills W Alley : </strong>{match2.ccandKillwAlley} <br></br>
                     <strong>Control Wards Bought : </strong>{match2.controlWardsBought} <br></br>
@@ -89,9 +87,9 @@ class Stats extends React.Component{
                     <strong>Dodged Skill Shots : </strong>{match2.dodgedSkillShots} <br></br>
                     <strong>Enemy's CCd : </strong>{match2.enemyCCd} <br></br>
                     <strong>Enemy Jungle Killed : </strong>{match2.enemyJungleKilled} <br></br>
-                    <strong>First Blood Kill: </strong>{match2.firstBloodKill} <br></br>
-                    <strong>First Blood Assist : </strong>{match2.firstBloodAssists} <br></br>
-                    <strong>First Blood Tower : </strong> {match2.firstTowerKill} <br></br>
+                    <strong>First Blood Kill: </strong>{match2.firstBloodKill ? "true" : "false"} <br></br>
+                    <strong>First Blood Assist : </strong>{match2.firstBloodAssists ? "true" : "false"} <br></br>
+                    <strong>First Blood Tower : </strong> {match2.firstTowerKill ? "true" : "false"} <br></br>
                     <strong>Heal On Teamates : </strong>{match2.healOnTeamates} <br></br>
                     <strong>Hit Skill Shots :</strong> {match2.hitSkillShots} <br></br>
                     <strong>Jungle Monsters Killed : </strong>{match2.jungleMonstersKilled} <br></br>
@@ -111,16 +109,11 @@ class Stats extends React.Component{
                 </Row>
             )});
             } else {
-                this.setState({player:
-                    (
-                        <>
-                            <PlayerInterval player={player}/>
-                        </>
-                    )})
+                let x = (<PlayerInterval player={player}/>)
+                
+                this.setState({player: x})
             }
     }
-
-
 
     getTabs(players){
         let z = []
@@ -129,7 +122,7 @@ class Stats extends React.Component{
         players.map(player => {
             if(i < 5){
                 z[i] =                     
-                    <Nav.Link key={i++}style={{width:"20%"}} onClick={()=>this.setCur(players,player.mo.match1.name)}>
+                    <Nav.Link key={i++}style={{width:"20%"}} onClick={()=>this.setCur(player)}>
                         <img src={
                             "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + 
                             player.mo.match1.champion + 
@@ -139,7 +132,7 @@ class Stats extends React.Component{
                     </Nav.Link>
             } else {
                 y[i - 5] = 
-                    <Nav.Link key={i++}style={{width:"20%"}} onClick={()=>this.setCur(players,player.mo.match1.name)}>
+                    <Nav.Link key={i++}style={{width:"20%"}} onClick={()=>this.setCur(player)}>
                         <img src={
                             "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + 
                             player.mo.match1.champion + 

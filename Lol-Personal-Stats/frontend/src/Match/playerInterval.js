@@ -4,7 +4,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 
@@ -20,6 +19,7 @@ class PlayerInterval extends React.Component{
       }
 
     componentDidMount() {
+        this.forceUpdate()
         this.getIntervals(this.state.player.intervals,this.state.cards);
     }
 
@@ -90,11 +90,10 @@ class PlayerInterval extends React.Component{
 
     render(){
         return <>
-                <Button style={{width:"20%"}} onClick={() => this.setVisible(this.state.cards,10)}> Toggle 10</Button>
-                <Button style={{width:"20%"}} onClick={() => this.setVisible(this.state.cards,15)}> Toggle 15</Button>
-                <Button style={{width:"20%"}} onClick={() => this.setVisible(this.state.cards,20)}> Toggle 20</Button>
-                <Button style={{width:"20%"}} onClick={() => this.setVisible(this.state.cards,25)}> Toggle 25</Button>
-                <Button style={{width:"20%"}} onClick={() => this.setVisible(this.state.cards,30)}> Toggle 30</Button>
+                <Button style={{width:"25%"}} onClick={() => this.setVisible(this.state.cards,10)}> Toggle 10</Button>
+                <Button style={{width:"25%"}} onClick={() => this.setVisible(this.state.cards,15)}> Toggle 15</Button>
+                <Button style={{width:"25%"}} onClick={() => this.setVisible(this.state.cards,20)}> Toggle 20</Button>
+                <Button style={{width:"25%"}} onClick={() => this.setVisible(this.state.cards,30)}> Toggle 30</Button>
             {this.state.intervals}
         </>
     }

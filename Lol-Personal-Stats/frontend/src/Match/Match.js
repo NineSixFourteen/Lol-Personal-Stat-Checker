@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import logo from '../logo.png';
 import Stats from './Stats';
+import LeaderBoard from './LeaderBoard';
 import './match.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import PlayerTop from './PlayerTop';
@@ -63,7 +64,7 @@ class Match extends React.Component {
                 <Stats players={players}></Stats>
                 </Col>
                 <Col>
-                <Stats players={players}></Stats>
+                <LeaderBoard players={players}/>
                 </Col>
             </Row>
         )})
