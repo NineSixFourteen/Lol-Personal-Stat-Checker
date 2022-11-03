@@ -107,8 +107,6 @@ public class AverController {
             for(MatchHistory matchHistory : histories){
                 mo1.add(overall1.findByMatchIDAndName(matchHistory.getMatchID(), names.get(matchHistory.getMatchID())).get(0));
             } 
-            System.out.println(mo1.size());
-            System.out.println(mo2.size());
             AverageMatch am = new AverageMatch();
             for(int i = 0; i < mo1.size(); i++){
                 am.add(new MatchOverall(mo1.get(i), mo2.get(i)));
@@ -119,36 +117,28 @@ public class AverController {
     }
     @GetMapping("/average/PlayerPosition")
     public @ResponseBody List<AverageMatch> getPlayerPosition(
-        @RequestParam(name = "name", required = false, defaultValue = "") String name,
-        @RequestParam(name = "position", required = false, defaultValue = "all") String poss,
-        @RequestParam(name = "GM", required = false, defaultValue = "all") String gms)
-    {
-        String[] posistions ;
-        if(poss.equals("all")){
-            posistions = new String[]{"TOP","JUNGLE","MIDDLE","BOTTOM","SUPPORT"};
-        } else{
-            posistions = poss.split(",");
-        }
+        @RequestParam(name = "name", required = false, defaultValue = "") String name) {
         List<AverageMatch> match = new ArrayList<>();
-        for(String pos : posistions){
-            List<MatchOverall1> mo1 = overall1.findByPositonAndName(pos,name);
-            List<MatchOverall2> mo2 = new ArrayList<>();
-            List<MatchHistory> histories = getHistorys(mo1);
-            var names = getMatchIdAndName(mo1);
-            mo1 = new ArrayList<>();
-            for(MatchHistory matchHistory : histories){
-                mo2.add(overall2.findByMatchIDAndName(matchHistory.getMatchID(), names.get(matchHistory.getMatchID())).get(0));
-            } 
-            for(MatchHistory matchHistory : histories){
-                mo1.add(overall1.findByMatchIDAndName(matchHistory.getMatchID(), names.get(matchHistory.getMatchID())).get(0));
-            } 
-            System.out.println(mo1.size());
-            System.out.println(mo2.size());
-            AverageMatch am = new AverageMatch();
-            for(int i = 0; i < mo1.size(); i++){
-                am.add(new MatchOverall(mo1.get(i), mo2.get(i)));
+        List<MatchOverall1> m1s = overall1.findByName(name);
+        List<MatchOverall2> m2s = overall2.findByName(name);
+        for(int i = 0; i < 6;i++){
+            match.add(new AverageMatch());
+        }
+        for(int i = 0; i < m1s.size();i++){
+            MatchOverall mo = new MatchOverall(m1s.get(i), m2s.get(i));
+            match.get(5).add(mo);
+            switch(m1s.get(i).getPosition()){
+                case "TOP":
+                    match.get(0).add(mo);break;
+                case "JUNGLE":
+                    match.get(1).add(mo);break;
+                case "MIDDLE":
+                    match.get(2).add(mo);break;
+                case "BOTTOM":
+                    match.get(3).add(mo);break;
+                case "SUPPORT":
+                    match.get(4).add(mo);break;
             }
-            match.add(am.build());
         }
         return match;
     }
@@ -163,13 +153,9 @@ public class AverController {
     }
 
     private List<MatchHistory> getHistorys(List<MatchOverall1> mo1) {
-        ArrayList<String> MatchIds = new ArrayList<>();
-        for(MatchOverall1 m1 : mo1){
-            MatchIds.add(m1.getMatchID());
-        }
         ArrayList<MatchHistory> historys = new ArrayList<>();
-        for(String matchId : MatchIds){
-            historys.add(history.findByMatchID(matchId).get(0));
+        for(MatchOverall1 m1 : mo1){
+            historys.add(history.findByMatchID(m1.getMatchID()).get(0));
         }
         return historys;
     }

@@ -8,7 +8,7 @@ import React from 'react';
 import stinger from './stinger.jpg'
 import team from './team.jpg'
 import overall from './overall.jpg'
-import logo from '../logo.png';
+import logo from '../photos/logo.png';
 import "bootstrap/dist/css/bootstrap.min.css"
 class Home extends React.Component {
 
@@ -37,9 +37,9 @@ render() {
             <Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Nav style={{marginLeft:'25%'}}>
-                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="#home"><h2>Overall</h2></Nav.Link>
-                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="#features"><h2>Match</h2></Nav.Link>
-                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="#pricing"><h2>Player</h2></Nav.Link>
+                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="overall"><h2>Overall</h2></Nav.Link>
+                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="match"><h2>Match</h2></Nav.Link>
+                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="player"><h2>Player</h2></Nav.Link>
                 </Nav>
                 </Container>
             </Navbar>
@@ -110,7 +110,7 @@ render() {
                 </Nav.Link>
             </Col>
             <Col >
-            <Nav.Link href="match">
+            <Nav.Link href="player">
                 <Card border='warning' style={{ width: "100%",cursor:'pointer',color:'#3d1302'}} >
                     <Card.Img variant="top" src={stinger} />
                     <Card.Body>

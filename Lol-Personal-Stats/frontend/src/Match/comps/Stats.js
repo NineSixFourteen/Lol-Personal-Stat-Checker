@@ -1,11 +1,8 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import PlayerInterval from "./playerInterval";
 import Col from 'react-bootstrap/Col';
 
@@ -23,26 +20,12 @@ class Stats extends React.Component{
 
     componentDidMount() {
         this.getTabs(this.state.players);
+        this.setPlayer(this.state.players[0])
     }
 
     setCur(player){
+        this.setState({player:""})
         this.setPlayer(player)
-    }
-
-    findName(players, name){
-        let i = 0;
-        console.log(name)
-        let ans = -1;
-        players.forEach(player => {
-            if(player.mo.match1.name == name){
-                console.log("FUUUUUUUUUUUUUCK")
-                ans = i++;
-            } else {
-                console.log(player.mo.match1.name)
-                i++;
-            }
-        });
-        return ans ;
     }
 
     setView(val){
@@ -57,7 +40,7 @@ class Stats extends React.Component{
                 (
                 <Row style={{color:'white'}}>
                     <Col style={{textSize:"300%"}}>
-                        <strong>Stats - Important</strong>  <br></br>
+                        <strong>Stats</strong>  <br></br>
                         <strong> Name </strong> : {match1.name} <br></br>
                         <strong> Champion : </strong>{match1.champion} <br></br>
                         <strong> Kills : </strong>{match1.kills} <br></br>
@@ -110,7 +93,6 @@ class Stats extends React.Component{
             )});
             } else {
                 let x = (<PlayerInterval player={player}/>)
-                
                 this.setState({player: x})
             }
     }

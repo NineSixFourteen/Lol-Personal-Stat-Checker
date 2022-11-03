@@ -1,7 +1,4 @@
 import React from "react";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
@@ -19,7 +16,7 @@ class PlayerInterval extends React.Component{
       }
 
     componentDidMount() {
-        this.forceUpdate()
+        this.setState({intervals: []})
         this.getIntervals(this.state.player.intervals,this.state.cards);
     }
 
@@ -36,6 +33,7 @@ class PlayerInterval extends React.Component{
             i++;
         })
         this.setState({cards:cardss})
+        this.setState({intervals: []})
         this.getIntervals(this.state.player.intervals,cardss)
     }
 
@@ -52,10 +50,11 @@ class PlayerInterval extends React.Component{
         return str
     }
 
-    getIntervals(intervals,cards){
+    getIntervals(intervalss,cards){
+        
         let x = [];
         let i = 0;
-        intervals.forEach(interval => {
+        intervalss.forEach(interval => {
             if(cards[i] && interval.gold != 0){
                 x[i] = (
                     <Card key={i} style={{background:"rgba(0,0,0,0.5)",color:'white'}}>

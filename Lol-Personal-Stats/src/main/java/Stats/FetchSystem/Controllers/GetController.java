@@ -46,9 +46,42 @@ public class GetController {
         return new PlayerGameRecord(mh, mo1,mo2, intervals);
     }
 
+    @GetMapping("/get/Player/last10")
+    public @ResponseBody List<MatchRecord> getPlayerLast10(
+        @RequestParam(name = "name", required = false, defaultValue = "") String name )
+    {
+        System.out.println(name);
+        List<MatchOverall1> mo1 = overall1.findByName(name);
+        ArrayList<String> ids = new ArrayList<>();
+        int size = mo1.size() < 10 ? mo1.size() : 10; // Checks if there is atleast 10 games on record
+        for(int i = 0; i < size; i++ ){
+            ids.add(mo1.get(i).getMatchID());
+        }
+        ArrayList<MatchRecord> games = new ArrayList<>();
+        for(String id : ids){
+            games.add(getMatchOffline(id));
+        }
+        return games;
+    }
+
     @GetMapping("/get/Match")
     public @ResponseBody MatchRecord getMatch(
         @RequestParam(name = "id", required = false, defaultValue = "") String id)
+    {
+        MatchHistory mh = history.findByMatchID(id).get(0);
+        List<MatchOverall1> mo1 = overall1.findByMatchID(id);
+        List<MatchOverall2> mo2 = overall2.findByMatchID(id);
+        ArrayList<MatchOverall> mo = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
+        for(int i = 0; i < mo1.size(); i++){
+            mo.add(new MatchOverall(mo1.get(i), mo2.get(i)));
+            names.add(mo1.get(i).getName());
+        }
+        ArrayList<ArrayList<MatchInterval>> intervals = Helper.seperateList(match.findByMatchID(id),names);
+        return new MatchRecord(mh,mo, intervals);
+    }
+
+    public MatchRecord getMatchOffline(String id)
     {
         MatchHistory mh = history.findByMatchID(id).get(0);
         List<MatchOverall1> mo1 = overall1.findByMatchID(id);

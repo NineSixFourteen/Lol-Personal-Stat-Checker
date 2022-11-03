@@ -7,12 +7,10 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
-import logo from '../logo.png';
-import Stats from './Stats';
-import LeaderBoard from './LeaderBoard';
-import './match.css'
+import logo from '../photos/logo.png';
+import StatsRow from './comps/StatsRow'
 import "bootstrap/dist/css/bootstrap.min.css"
-import PlayerTop from './PlayerTop';
+import PlayerTop from './comps/PlayerTop';
 
 class Match extends React.Component {
     constructor (props){
@@ -25,17 +23,26 @@ class Match extends React.Component {
             row: [],
             tabs: null,
             current: 0,
-            stats: null
+            stats: null,
           };
       }
 
     async getMatch(id) {
-        this.setState({id:"",id2:"",mathHistory:null,players:[],row:[]})
+        this.setState({
+            id: "",
+            id2: "",
+            matchHistroy: null,
+            players: ["","","","",""],
+            row: [],
+            tabs: null,
+            current: 0,
+            stats: null
+          });
         const response = await fetch('/get/Match?id=' + id);
         const body = await response.json();
-        this.setState({id2:this.state.id ,matchHistroy: body.matchHistroy, players: body.players})
+        this.setState({id2:this.state.id ,matchHistroy: body.matchHistroy,stats:null, players: body.players})
         this.makeBody(body.players)
-        this.makeStats(body.players,1)
+        this.makeStats(body.players)
     }
 
     makeBody(players){
@@ -58,21 +65,12 @@ class Match extends React.Component {
     }
 
     makeStats(players){
-        this.setState({stats : (
-            <Row>
-                <Col>
-                <Stats players={players}></Stats>
-                </Col>
-                <Col>
-                <LeaderBoard players={players}/>
-                </Col>
-            </Row>
-        )})
+        this.setState({stats: <StatsRow players={players}></StatsRow>})
     }
+
 
     render() {
         const players = this.state.players;
-        console.log(players)
         return (
             <div className="App">
                 <header >
@@ -89,9 +87,9 @@ class Match extends React.Component {
             <Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Nav style={{marginLeft:'25%'}}>
-                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="#home"><h2>Overall</h2></Nav.Link>
-                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="#features"><h2>Match</h2></Nav.Link>
-                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="#pricing"><h2>Player</h2></Nav.Link>
+                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="overall"><h2>Overall</h2></Nav.Link>
+                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="match"><h2>Match</h2></Nav.Link>
+                    <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="player"><h2>Player</h2></Nav.Link>
                 </Nav>
             </Container>
             </Navbar>
@@ -108,7 +106,7 @@ class Match extends React.Component {
                                  onChange={e => this.setState({ id: e.target.value })}
                                 />
                                 <Form.Text className="text-muted">
-                                    Example : EUW1_6115488981 + {this.state.cur}
+                                    Example : EUW1_6115488981
                                 </Form.Text>
                             </Form.Group>
                         </Form>
@@ -129,11 +127,7 @@ class Match extends React.Component {
                     </Card>   
                 </Row>
                 <Row className = "my-5"> 
-                    <Card style={{backgroundColor:"rgba(200,200,200,0.5)"}}>
-                        <Card.Body>
                         {this.state.stats}
-                        </Card.Body>   
-                    </Card>   
                 </Row>
             </Container>
             </header></div>

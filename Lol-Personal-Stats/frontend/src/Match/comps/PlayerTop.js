@@ -2,13 +2,13 @@ import React from "react";
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Card from "react-bootstrap/Card"
-import Top from "./Top.png"
-import Jungle from "./Jungle.png"
-import Mid from "./Mid.png"
-import Bot from "./Bot.png"
-import Support from "./Support.png"
-import Question from "./Question.png"
-import Container from "react-bootstrap/esm/Container";
+import Top from "../../photos/Top.png"
+import Jungle from "../../photos/Jungle.png"
+import Mid from "../../photos/Mid.png"
+import Bot from "../../photos/Bot.png"
+import Support from "../../photos/Support.png"
+import Question from "../../photos/Question.png"
+
 class PlayerTop extends React.Component {
     constructor(props) {
       super(props);
