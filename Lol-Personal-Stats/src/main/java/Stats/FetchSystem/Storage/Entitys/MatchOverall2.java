@@ -52,6 +52,9 @@ public class MatchOverall2 {
     private int SheildOnTeamates;
     public MatchOverall2() {
     }
+    public Integer getId() {
+        return id;
+    }
     public String getMatchId() {
         return MatchId;
     }

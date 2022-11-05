@@ -44,7 +44,7 @@ render() {
                 </Container>
             </Navbar>
             <Container fluid>
-            <Row className = "px-4 my-5"> 
+            <Row className = "my-5 px-4"> 
                 <Card style={{visibility:this.state.text,fontSize:'100%'} }border='warning'>
                     <Card.Header border='dark'><span style={{fontSize:'150%',fontWeight:'700'}}> About This Site </span>
                     <Nav variant="tabs" >
@@ -66,7 +66,7 @@ render() {
                     </Card.Body>
                 </Card> 
             </Row>
-            <Row className = "px-4 my-5">       
+            <Row className = "my-5">       
                 <Col  >
                 <Nav.Link href="Overall">
                 <Card border='warning' style={{ width: "100%", cursor:'pointer' , color:'#3d1302'}}>

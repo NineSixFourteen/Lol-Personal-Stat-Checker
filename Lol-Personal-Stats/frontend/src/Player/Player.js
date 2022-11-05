@@ -11,6 +11,7 @@ import logo from '../photos/logo.png';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Last10 from './Comps/Last10';
 import PlayerStatsHolder from './Comps/PlayerStatsHolder';
+import ChampStats from './Comps/ChampStats';
 class Match extends React.Component {
 
     constructor (props){
@@ -19,7 +20,8 @@ class Match extends React.Component {
             id: "",
             id2: "",
             last10: "",
-            stats:""
+            stats:"",
+            champs: ""
           };
     }
 
@@ -34,6 +36,14 @@ class Match extends React.Component {
         const lastBody = await last10.json();
         const average = await fetch('/average/PlayerPosition?name=' + id);
         const averBody = await average.json();
+        const topChamps = await fetch('/get/Champ/topChamps?name=' + id);
+        const topChampBody = await topChamps.json();
+        let x = []
+        for (const [key, value] of Object.entries(topChampBody)) { 
+            x.push({name: key, value: value})
+        }        
+        x.sort((y,z) => { if( y.value > z.value) return -1; return 1})
+        console.log(x)
         if(lastBody.length == 0){
             //TODO Player Not Found
             this.setState({last10:
@@ -42,8 +52,6 @@ class Match extends React.Component {
                 )
             })
         } else {
-        console.log(lastBody)
-        console.log(averBody)
         this.setState({last10:
         <Row>
             <Col><Last10 Last10={lastBody} player={id} /></Col>
@@ -53,23 +61,26 @@ class Match extends React.Component {
                 <Col><PlayerStatsHolder stats={averBody} player={id} /></Col>
             </Row>})
         }
-    }
-
-
+        this.setState({champs:
+            <Row>
+                <Col><ChampStats topChamps={x} player={id} /></Col>
+            </Row>})
+        }
+    
     render() {
         return (
             <div className="App">
             <header >
         <Navbar bg="dark" variant="dark" >
-        <Nav.Link  href="home">
-        <img
-          style={{cursor:'pointer'}}
-          alt=""
-          src={logo}
-          width="300"
-          height="60"
-        />
-        </Nav.Link>
+            <Nav.Link  href="home">
+                <img
+                style={{cursor:'pointer'}}
+                alt=""
+                src={logo}
+                width="300"
+                height="60"
+                />
+            </Nav.Link>
         <Container>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Nav style={{marginLeft:'25%'}}>
@@ -107,6 +118,9 @@ class Match extends React.Component {
                         </Row>
                         <Row className = "px-4 my-5">
                                 {this.state.stats}
+                        </Row> 
+                        <Row className = "px-4 my-5">
+                                {this.state.champs}
                         </Row> 
                 </Container>
         </header>

@@ -33,6 +33,8 @@ class PlayerStats extends React.Component{
         let z = "";
         switch(cur){
             case 5:z =  "Overall";break;
+            case 6:z =  "SR";break;
+            case 7:z =  "ARAM";break;
             case 0:z =  "Top";break;
             case 1:z =  "Jungle";break;
             case 2:z =  "Mid";break;
@@ -40,14 +42,16 @@ class PlayerStats extends React.Component{
             case 4:z =  "Support";break; 
             }
         let y = (
-            <Row style={{color:'white',background:"rgba(40,80,40,0.4)",border:"ridge"}}>
-                <Nav variant="tabs" style={{background:"rgba(20,20,20,0.5)"}}>
-                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(5)}><span style={{fontSize:"120%",marginLeft:"auto",marginRight:"auto"}}>Overall</span></Nav.Link>
-                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(0)}><span style={{fontSize:"120%",marginLeft:"auto",marginRight:"auto"}}>Top</span></Nav.Link>
-                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(1)}><span style={{fontSize:"120%",marginLeft:"auto",marginRight:"auto"}}>Jungle</span></Nav.Link>
-                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(2)}><span style={{fontSize:"120%",marginLeft:"auto",marginRight:"auto"}}>Mid</span></Nav.Link>
-                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(3)}><span style={{fontSize:"120%",marginLeft:"auto",marginRight:"auto"}}>Adc</span></Nav.Link>
-                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(4)}><span style={{fontSize:"120%",marginLeft:"auto",marginRight:"auto"}}>Sup</span></Nav.Link>
+            <Row  noGutters={true}  style={{color:'white',background:"rgba(40,80,40,0.4)",border:"ridge", gutterY:0}}>
+                <Nav clasName="g-0" style={{fontSize:"126%",background:"rgba(20,20,20,0.5)"}}>
+                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(5)}>Overall</Nav.Link>
+                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(6)}>SR</Nav.Link>
+                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(7)}>ARAM</Nav.Link>
+                    <Nav.Link style={{marginLeft:"1%",background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(0)}>Top</Nav.Link>
+                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(1)}>Jun</Nav.Link>
+                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(2)}>Mid</Nav.Link>
+                    <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(3)}>Adc</Nav.Link>
+                    <Nav.Link style={{width:"11.6%",background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(4)}>Sup</Nav.Link>
                 </Nav>
                 <h1 style={{marginLeft:"16%",marginRight:"auto"}}>{z + " - " + x.total + (x.total != 1 ? " Games" : " Game")}</h1>
                 <Col>
@@ -87,8 +91,8 @@ class PlayerStats extends React.Component{
                     <strong>Hit Skill Shots :</strong> {(x.hitSkillShots/x.total).toFixed(2)} <br></br>
                     <strong>Jungle Monsters Killed : </strong>{(x.jungleMonstersKilled/x.total).toFixed(2)} <br></br>
                     <strong>lane Minions At 10 Minutes :</strong> {(x.landMinionsAt10/x.total).toFixed(2)} <br></br>
-                    <strong>Peak CS Lead : </strong>{(x.peakCsLead/x.total).toFixed(2)} <br></br>
-                    <strong>Peak Kill Lead : </strong>{(x.peakKillDiff/x.total).toFixed(2)} <br></br>
+                    <strong>Average Peak CS Lead : </strong>{(x.peakCsLead/x.total).toFixed(2)} <br></br>
+                    <strong>Average Peak Kill Lead : </strong>{(x.peakKillDiff/x.total).toFixed(2)} <br></br>
                     <strong>Picks With Alley :</strong> {(x.picksWAlley/x.total).toFixed(2)} <br></br>
                     <strong>Pings :</strong> {(x.pings/x.total).toFixed(2)} <br></br>
                     <strong>Shield On Teamates : </strong>{(x.shield/x.total).toFixed(2)} <br></br>

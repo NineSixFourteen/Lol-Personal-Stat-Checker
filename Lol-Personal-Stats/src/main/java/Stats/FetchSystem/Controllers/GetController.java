@@ -1,6 +1,10 @@
 package Stats.FetchSystem.Controllers;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,7 @@ import Stats.FetchSystem.Storage.Repository.MatchHistoryRespository;
 import Stats.FetchSystem.Storage.Repository.MatchIntervalRespository;
 import Stats.FetchSystem.Storage.Repository.MatchOverall1Respository;
 import Stats.FetchSystem.Storage.Repository.MatchOverall2Respository;
+
 
 @Controller
 public class GetController {
@@ -50,18 +55,44 @@ public class GetController {
     public @ResponseBody List<MatchRecord> getPlayerLast10(
         @RequestParam(name = "name", required = false, defaultValue = "") String name )
     {
-        System.out.println(name);
         List<MatchOverall1> mo1 = overall1.findByName(name);
-        ArrayList<String> ids = new ArrayList<>();
-        int size = mo1.size() < 10 ? mo1.size() : 10; // Checks if there is atleast 10 games on record
-        for(int i = 0; i < size; i++ ){
-            ids.add(mo1.get(i).getMatchID());
+        List<MatchHistory> mh = new ArrayList<>();
+        for(MatchOverall1 m1 : mo1){
+            mh.add(history.findByMatchID(m1.getMatchID()).get(0));
         }
+        List<String> last10 = last10(mh);
         ArrayList<MatchRecord> games = new ArrayList<>();
-        for(String id : ids){
+        for(String id : last10){
             games.add(getMatchOffline(id));
         }
         return games;
+    }
+
+    private List<String> last10(List<MatchHistory> mh) {
+        Comparator<MatchHistory> byDate = (MatchHistory mh1, MatchHistory mh2) -> mh2.getMatchID().compareTo(mh1.getMatchID());
+        mh.sort(byDate);
+        int len = mh.size() < 10 ? mh.size() : 10;
+        List<String> m = new ArrayList<>();
+        for(int i = 0 ;  i < len; i++){
+            m.add(mh.get(i).getMatchID());
+        }
+        return m;
+    }
+
+    @GetMapping("/get/Champ/topChamps")
+    public @ResponseBody HashMap<String,Integer> getChampTop5(
+        @RequestParam(name = "name", required = false, defaultValue = "") String name )
+    {
+        HashMap<String,Integer> champCount = new HashMap<>();
+        for(MatchOverall1 m1 : overall1.findByName(name)){
+            String champ = m1.getChampion();
+            if(champCount.containsKey(champ)){
+                champCount.put(champ, champCount.get(champ) + 1);
+            } else {
+                champCount.put(champ, 1);
+            }
+        }
+        return champCount;
     }
 
     @GetMapping("/get/Match")

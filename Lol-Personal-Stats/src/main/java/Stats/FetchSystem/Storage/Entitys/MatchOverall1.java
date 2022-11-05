@@ -45,6 +45,9 @@ public class MatchOverall1 {
     private int BaronsTaken;
     private int ObjectiveSteals;
     private int VisionScore;
+    public Integer getId() {
+        return id;
+    }
     public MatchOverall1() {
     }
     public String getTeam() {

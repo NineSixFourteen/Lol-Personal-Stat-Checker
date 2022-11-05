@@ -29,6 +29,9 @@ public class MatchInterval {
 
     public MatchInterval() {
     }
+    public Integer getId() {
+        return id;
+    }
 
     public MatchInterval(int time) {
         this.time = time;

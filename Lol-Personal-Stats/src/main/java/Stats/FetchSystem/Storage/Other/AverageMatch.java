@@ -276,6 +276,7 @@ public class AverageMatch {
         assists += mo.getMatch1().getAssists();
         wardsPlaced +=  mo.getMatch1().getWardsPlaced(); 
         wardsDestroyed += mo.getMatch1().getWardsDestroyed();
+        gold += mo.getMatch1().getGold();
         cs += mo.getMatch1().getCS();
         damageDealt += mo.getMatch1().getDamageDealt(); damageTaken += mo.getMatch1().getDamageTaken(); 
         turretDamage += mo.getMatch1().getTurretDamage(); turretsTaken += mo.getMatch1().getTurretsTaken();
