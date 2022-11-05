@@ -1,8 +1,6 @@
 package Stats.FetchSystem.Controllers;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +88,38 @@ public class GetController {
                 champCount.put(champ, champCount.get(champ) + 1);
             } else {
                 champCount.put(champ, 1);
+            }
+        }
+        return champCount;
+    }
+
+    @GetMapping("/get/Champs/played")
+    public @ResponseBody List<HashMap<String,Integer>> getChamps(
+        @RequestParam(name = "name", required = false, defaultValue = "") String name )
+    {
+        List<HashMap<String,Integer>> champCount = new ArrayList<>();
+        for(int i = 0; i< 3; i++){
+            champCount.add(new HashMap<>());
+        }
+        for(MatchOverall1 m1 : overall1.findByName(name)){
+            String champ = m1.getChampion();
+            if(champCount.get(0).containsKey(champ)){
+                champCount.get(0).put(champ, champCount.get(0).get(champ) + 1);
+            } else {
+                champCount.get(0).put(champ, 1);
+            }
+            if(m1.getPosition().trim().length() != 0){
+                if(champCount.get(1).containsKey(champ)){
+                    champCount.get(1).put(champ, champCount.get(1).get(champ) + 1);
+                } else {
+                    champCount.get(1).put(champ, 1);
+                }
+            } else {
+                if(champCount.get(2).containsKey(champ)){
+                    champCount.get(2).put(champ, champCount.get(2).get(champ) + 1);
+                } else {
+                    champCount.get(2).put(champ, 1);
+                }
             }
         }
         return champCount;

@@ -27,6 +27,15 @@ class PlayerStats extends React.Component{
         this.display(this.state.stats,cur)
     }
 
+    flip(bool){
+        let x = !bool
+        let m = "Show"
+        if(x){
+            m = "Hide"
+        }
+        this.setState({show:x, msg:m})
+    }
+
     
     display(stats, cur){
         let x = stats[cur];
@@ -42,8 +51,8 @@ class PlayerStats extends React.Component{
             case 4:z =  "Support";break; 
             }
         let y = (
-            <Row  noGutters={true}  style={{color:'white',background:"rgba(40,80,40,0.4)",border:"ridge", gutterY:0}}>
-                <Nav clasName="g-0" style={{fontSize:"126%",background:"rgba(20,20,20,0.5)"}}>
+            <Row className = "baba" style={{color:'white',background:"rgba(40,80,40,0.4)",border:"ridge"}}>
+                <Nav bg = "dark" style={{fontSize:"115%",background:"rgba(0,10,10,0.8)"}}>
                     <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(5)}>Overall</Nav.Link>
                     <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(6)}>SR</Nav.Link>
                     <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(7)}>ARAM</Nav.Link>
@@ -54,7 +63,7 @@ class PlayerStats extends React.Component{
                     <Nav.Link style={{width:"11.6%",background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(4)}>Sup</Nav.Link>
                 </Nav>
                 <h1 style={{marginLeft:"16%",marginRight:"auto"}}>{z + " - " + x.total + (x.total != 1 ? " Games" : " Game")}</h1>
-                <Col>
+                <Col className="px-2 py-2">
                         <strong> Kills : </strong>{(x.kills/x.total).toFixed(2)} <br></br>
                         <strong> Deaths : </strong>{(x.deaths/x.total).toFixed(2)} <br></br>
                         <strong> Assists :</strong> {(x.assists/x.total).toFixed(2)} <br></br>
@@ -76,7 +85,7 @@ class PlayerStats extends React.Component{
                         <strong>Time CC others : </strong>{(x.timeCCother/x.total).toFixed(2)} <br></br>
                         <strong>Turret Plates :</strong> {(x.turretPlates/x.total).toFixed(2)} <br></br>                   
                     </Col>
-                    <Col>
+                    <Col className="px-2 py-2">
                     <strong>Ability Uses : </strong>{(x.abiltyUses/x.total).toFixed(2)} <br></br>
                     <strong>CC And Kills W Alley : </strong>{(x.cCandKillwAlley/x.total).toFixed(2)} <br></br>
                     <strong>Control Wards Bought : </strong>{(x.controlWardsBought/x.total).toFixed(2)} <br></br>
@@ -90,7 +99,7 @@ class PlayerStats extends React.Component{
                     <strong>Heal On Teamates : </strong>{(x.heal/x.total).toFixed(2)} <br></br>
                     <strong>Hit Skill Shots :</strong> {(x.hitSkillShots/x.total).toFixed(2)} <br></br>
                     <strong>Jungle Monsters Killed : </strong>{(x.jungleMonstersKilled/x.total).toFixed(2)} <br></br>
-                    <strong>lane Minions At 10 Minutes :</strong> {(x.landMinionsAt10/x.total).toFixed(2)} <br></br>
+                    <strong>lane Minions At 10 :</strong> {(x.landMinionsAt10/x.total).toFixed(2)} <br></br>
                     <strong>Average Peak CS Lead : </strong>{(x.peakCsLead/x.total).toFixed(2)} <br></br>
                     <strong>Average Peak Kill Lead : </strong>{(x.peakKillDiff/x.total).toFixed(2)} <br></br>
                     <strong>Picks With Alley :</strong> {(x.picksWAlley/x.total).toFixed(2)} <br></br>
@@ -105,7 +114,18 @@ class PlayerStats extends React.Component{
 
     render(){
         return(
-            this.state.body
+            <Card style={{background:'rgba(50,50,50,0.5)'}}>
+            <Card.Header onClick={()=>this.flip(this.state.show)} style={{background:"rgba(71, 17, 166,0.3)", marginLeft:'auto',marginRight:'auto',fontSize:'200%',fontWeight:'600',color:'tan',textShadow:'1px 0 black'}}>
+            Player Stats
+            </Card.Header>
+            <Card.Body className="px-4">
+            <Collapse in={this.state.show}>
+                <div id="example-collapse-text">
+                    {this.state.body}
+                </div>
+            </Collapse>
+            </Card.Body>
+        </Card>
         )
     }
 

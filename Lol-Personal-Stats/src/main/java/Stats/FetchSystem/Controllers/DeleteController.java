@@ -55,7 +55,7 @@ public class DeleteController {
             }
             ids.add(mh.getMatchID());
         }
-        //writeDups(dups);
+        writeDups(dups);
         for(String dup : dups){
             deleteRecords(dup);
         }
@@ -97,7 +97,6 @@ public class DeleteController {
     }
     
     private void deleteRecords(String dup) {
-        List<Integer> ids = new ArrayList<>();
         for(var x : match.findByMatchID(dup)){
             match.deleteById(x.getId());
         }

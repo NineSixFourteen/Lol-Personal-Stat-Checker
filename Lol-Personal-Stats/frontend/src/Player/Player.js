@@ -10,8 +10,8 @@ import Col from 'react-bootstrap/Col';
 import logo from '../photos/logo.png';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Last10 from './Comps/Last10';
-import PlayerStatsHolder from './Comps/PlayerStatsHolder';
 import ChampStats from './Comps/ChampStats';
+import PlayerStats from './Comps/PlayersStats';
 class Match extends React.Component {
 
     constructor (props){
@@ -38,12 +38,8 @@ class Match extends React.Component {
         const averBody = await average.json();
         const topChamps = await fetch('/get/Champ/topChamps?name=' + id);
         const topChampBody = await topChamps.json();
-        let x = []
-        for (const [key, value] of Object.entries(topChampBody)) { 
-            x.push({name: key, value: value})
-        }        
-        x.sort((y,z) => { if( y.value > z.value) return -1; return 1})
-        console.log(x)
+        let x = this.fixObj(topChampBody)
+
         if(lastBody.length == 0){
             //TODO Player Not Found
             this.setState({last10:
@@ -58,14 +54,25 @@ class Match extends React.Component {
         </Row>})
         this.setState({stats:
             <Row>
-                <Col><PlayerStatsHolder stats={averBody} player={id} /></Col>
+                <Col><PlayerStats stats={averBody} cur={5}/> </Col>
+                <Col><PlayerStats stats={averBody} cur={0}/></Col>
             </Row>})
         }
         this.setState({champs:
             <Row>
                 <Col><ChampStats topChamps={x} player={id} /></Col>
+                <Col><ChampStats topChamps={x} player={id} /></Col>
             </Row>})
         }
+
+    fixObj(obj){
+        let x = []
+        for (const [key, value] of Object.entries(obj)) { 
+            x.push({name: key, value: value})
+        }     
+        x.sort((y,z) => { if( y.value > z.value) return -1; return 1})
+        return x;
+    }
     
     render() {
         return (

@@ -77,6 +77,11 @@ public class AverController {
             if(m1s.get(i).getChampion().equals(champ)){
                 MatchOverall mo = new MatchOverall(m1s.get(i), m2s.get(i));
                 am.get(0).add(mo);
+                if(m1s.get(i).getPosition().trim().length() != 0 ){
+                    am.get(1).add(mo);
+                } else {
+                    am.get(2).add(mo);
+                }
             }
         }
         List<AverageMatch> am2 = new ArrayList<>();

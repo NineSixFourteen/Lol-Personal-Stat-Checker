@@ -1,10 +1,7 @@
 package Stats.ListUpdater;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,7 +18,7 @@ public class SendMatches {
 
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        ArrayList<String> recentMatches = getMatchIDList(1);
+        ArrayList<String> recentMatches = getMatchIDList(0);
         for(String recent : recentMatches){
             SendMatch(recent);
         }
@@ -69,37 +66,6 @@ public class SendMatches {
             is.close();
           }
     }
-
-    private static void sendDelete(Integer[] ov1, Integer[] ov2) throws IOException{
-        String command  = "curl localhost:8080/delete/ov1 -d id=";
-        String command2 = "curl localhost:8080/delete/ov2 -d id=";
-        for(Integer o1 : ov1){
-            ProcessBuilder processBuilder = new ProcessBuilder((command + o1).split(" "));
-            processBuilder.directory(new File("C:\\Users\\aidan\\"));
-            Process process = processBuilder.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            StringBuilder builder = new StringBuilder();
-            String line = null;
-            while ( (line = reader.readLine()) != null) {
-                builder.append(line);
-                builder.append(System.getProperty("line.separator"));
-            }
-        }
-        for(Integer o2 : ov2){
-            ProcessBuilder processBuilder = new ProcessBuilder((command2 + o2).split(" "));
-            Process process = processBuilder.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            StringBuilder builder = new StringBuilder();
-            String line = null;
-            while ( (line = reader.readLine()) != null) {
-                builder.append(line);
-                builder.append(System.getProperty("line.separator"));
-            }
-            System.out.println(builder.toString());
-        }
-        
-    }
-
     private static void SendMatch(String match) {
         try{
             String command = "curl localhost:8080/AddMatch -d id=" + match;
@@ -118,20 +84,6 @@ public class SendMatches {
             e.printStackTrace();
         }
 
-    }
-
-    private static ArrayList<String> getMatchList() {
-        try{
-            File file = new File(GetInfo.fileName);
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            ArrayList<String> matches = new ArrayList<>();
-            String st;
-            while ((st = br.readLine()) != null)matches.add(st);
-            return matches;
-        } catch(Exception e){
-            e.printStackTrace();   
-        }
-        return null;
     }
 }
     
