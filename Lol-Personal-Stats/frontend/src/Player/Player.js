@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Last10 from './Comps/Last10';
 import ChampStats from './Comps/ChampStats';
 import PlayerStats from './Comps/PlayersStats';
+import TeamStats from './Comps/TeamStats';
 class Match extends React.Component {
 
     constructor (props){
@@ -21,7 +22,8 @@ class Match extends React.Component {
             id2: "",
             last10: "",
             stats:"",
-            champs: ""
+            champs: "",
+            team: ""
           };
     }
 
@@ -30,16 +32,21 @@ class Match extends React.Component {
             id: "",
             id2: "",
             last10: "",
-            stats:""
+            stats:"",
+            champs: "",
+            team: ""
         })
-        const last10 = await fetch('/get/Player/last10?name=' + id);
-        const lastBody = await last10.json();
+        const histroy = await fetch('/get/Player/last10?name=' + id);
+        const histroyBody = await histroy.json();
+        const lastBody = this.getLast10(histroyBody);
         const average = await fetch('/average/PlayerPosition?name=' + id);
         const averBody = await average.json();
         const topChamps = await fetch('/get/Champ/topChamps?name=' + id);
         const topChampBody = await topChamps.json();
+        const avgTeam = await fetch('/average/Player/Team?name=' + id);
+        const avgTeamBody = await avgTeam.json();
+        console.log(avgTeamBody)
         let x = this.fixObj(topChampBody)
-
         if(lastBody.length == 0){
             //TODO Player Not Found
             this.setState({last10:
@@ -63,7 +70,21 @@ class Match extends React.Component {
                 <Col><ChampStats topChamps={x} player={id} /></Col>
                 <Col><ChampStats topChamps={x} player={id} /></Col>
             </Row>})
+        this.setState({team:
+            <Row>
+                <Col><TeamStats avgTeam={avgTeamBody} cur={1} /></Col>
+                <Col><TeamStats avgTeam={avgTeamBody} cur={2} /></Col>
+            </Row>})
+    }
+
+    getLast10(list){
+        let i = 0; 
+        let z = []
+        while(i < 10){
+            z[i] = list[i++];
         }
+        return z;
+    }
 
     fixObj(obj){
         let x = []
@@ -128,6 +149,9 @@ class Match extends React.Component {
                         </Row> 
                         <Row className = "px-4 my-5">
                                 {this.state.champs}
+                        </Row> 
+                        <Row className = "px-4 my-5">
+                                {this.state.team}
                         </Row> 
                 </Container>
         </header>

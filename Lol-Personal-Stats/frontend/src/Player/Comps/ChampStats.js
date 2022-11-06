@@ -87,7 +87,6 @@ class ChampStats extends React.Component{
                 y.push(this.fixObj(z))
             }
         )
-        console.log(y)
         let i = 0;
         let j = 0; 
         let s = []
@@ -120,18 +119,17 @@ class ChampStats extends React.Component{
         if(flip){
             s.reverse();
         }
-        console.log(s)
         let rows = [];
         {s.forEach(
             obj => {
-                rows.push(<Row className="my-2" style={{color:"white", outline:"groove"}}>
+                rows.push(<Row className="baba my-2" style={{color:"white", outline:"groove"}}>
                     <Col>
-                        <Col>
-                            {"Name : " + obj.name}
+                        <Col className="mx-2">
+                            {" Name : " + obj.name}
                         </Col>
                     </Col>
                     <Col>
-                        <Row>
+                        <Row >
                             <Col>
                                 {"Total : " + obj.total}
                             </Col>
@@ -146,7 +144,6 @@ class ChampStats extends React.Component{
                 </Row>)
             }
         )}
-        console.log(rows)
         let body = (
             <Row >
                 <Col>
@@ -186,8 +183,8 @@ class ChampStats extends React.Component{
                         </Form>
                     </div>
                     </Row>
-                    <Row className="baba" style={{background:"rgba(0,0,0,0.5)",border:"outset", color:"white", borderColor:"black"}}>
-                        <Row  className="baba">
+                    <Row  className="baba" style={{background:"rgba(0,0,0,0.5)",border:"outset", color:"white", borderColor:"black"}}>
+                        <Row className="baba">
                             <Nav>
                                 <Nav.Link style={{background:this.getCur(-1, 0),width:"47%"}} onClick={() => this.showChampList(0)}>  Name  </Nav.Link>
                                 <Nav.Link style={{background:this.getCur(-1, 1),width:"18%"}} onClick={() => this.showChampList(1)}>  Total </Nav.Link>
