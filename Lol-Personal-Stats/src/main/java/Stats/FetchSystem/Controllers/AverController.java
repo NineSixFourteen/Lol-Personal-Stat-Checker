@@ -127,28 +127,23 @@ public class AverController {
         }
         for(int i = 0; i < m1s.size();i++){
             MatchOverall mo = new MatchOverall(m1s.get(i), m2s.get(i));
+            match.get(0).add(mo);
             if(m1s.get(i).getPosition().trim().length() != 0 ){
-                match.get(6).add(mo);
+                match.get(1).add(mo);
             } else {
-                if(mo.getMatch2().getStealthWardsPlaced() > 0){
-                    System.out.println(mo.getMatch1().getMatchID());
-                    System.out.println(mo.getMatch1().getChampion());
-                    System.out.println(mo.getMatch2().getStealthWardsPlaced());
-                }
-                match.get(7).add(mo);
+                match.get(2).add(mo);
             }
-            match.get(5).add(mo);
             switch(m1s.get(i).getPosition()){
                 case "TOP":
-                    match.get(0).add(mo);break;
-                case "JUNGLE":
-                    match.get(1).add(mo);break;
-                case "MIDDLE":
-                    match.get(2).add(mo);break;
-                case "BOTTOM":
                     match.get(3).add(mo);break;
-                case "SUPPORT":
+                case "JUNGLE":
                     match.get(4).add(mo);break;
+                case "MIDDLE":
+                    match.get(5).add(mo);break;
+                case "BOTTOM":
+                    match.get(6).add(mo);break;
+                case "SUPPORT":
+                    match.get(7).add(mo);break;
             }
         }
         return match;

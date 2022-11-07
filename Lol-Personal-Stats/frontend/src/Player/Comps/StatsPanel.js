@@ -5,30 +5,32 @@ import Col from 'react-bootstrap/Col';
 import Collapse from "react-bootstrap/Collapse";
 import Nav from "react-bootstrap/Nav";
 
-class TeamStats extends React.Component{
+class StatsPanel extends React.Component{
 
-    
     constructor (props){
         super(props);
         this.state = {
-            avgTeam: props.avgTeam,
+            items: props.items,
             cur: props.cur,
+            heading: props.heading,
+            units: props.units,
+            unit: props.unit,
             body: <h1>re</h1>,
             show: true,
           };
     }
 
     componentDidMount() {
-        this.display(this.state.avgTeam, this.state.cur)
+        this.display(this.state.items, this.state.cur)
     }
 
     setCur(cur){
         this.setState({cur:cur})
-        this.display(this.state.avgTeam,cur)
+        this.display(this.state.items,cur)
     }
 
-    display(team,cur){
-        let x = team[cur];
+    display(items ,cur){
+        let x = items[cur];
         let z = "";
         switch(cur){
             case 0:z =  "Overall";break;
@@ -43,16 +45,16 @@ class TeamStats extends React.Component{
         let y =  
         <Row className = "baba" style={{color:'white',background:"rgba(40,80,40,0.4)",border:"ridge"}}>
             <Nav bg = "dark" style={{fontSize:"115%",background:"rgba(0,10,10,0.8)"}}>
-                <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(0)}>Overall</Nav.Link>
-                <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(1)}>SR</Nav.Link>
-                <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(2)}>ARAM</Nav.Link>
-                <Nav.Link style={{marginLeft:"1%",background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(3)}>Top</Nav.Link>
-                <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(4)}>Jun</Nav.Link>
-                <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(5)}>Mid</Nav.Link>
-                <Nav.Link style={{background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(6)}>Adc</Nav.Link>
-                <Nav.Link style={{width:"11.6%",background:"rgba(20,20,20,0.5)"}} onClick={()=>this.setCur(7)}>Sup</Nav.Link>
+                <Nav.Link style={{background:"rgba(20,20,20,0.5)", fontSize:"90%"}} onClick={()=>this.setCur(0)}>Overall</Nav.Link>
+                <Nav.Link style={{background:"rgba(20,20,20,0.5)", fontSize:"90%"}} onClick={()=>this.setCur(1)}>SR</Nav.Link>
+                <Nav.Link style={{background:"rgba(20,20,20,0.5)", fontSize:"90%"}} onClick={()=>this.setCur(2)}>ARAM</Nav.Link>
+                <Nav.Link style={{marginLeft:"1%",background:"rgba(20,20,20,0.5)", fontSize:"90%"}} onClick={()=>this.setCur(3)}>Top</Nav.Link>
+                <Nav.Link style={{background:"rgba(20,20,20,0.5)", fontSize:"90%"}} onClick={()=>this.setCur(4)}>Jun</Nav.Link>
+                <Nav.Link style={{background:"rgba(20,20,20,0.5)", fontSize:"90%"}} onClick={()=>this.setCur(5)}>Mid</Nav.Link>
+                <Nav.Link style={{background:"rgba(20,20,20,0.5)", fontSize:"90%"}} onClick={()=>this.setCur(6)}>Adc</Nav.Link>
+                <Nav.Link style={{width:"11.6%",background:"rgba(20,20,20,0.5)", fontSize:"90%"}} onClick={()=>this.setCur(7)}>Sup</Nav.Link>
             </Nav>
-            <h1 style={{marginLeft:"16%",marginRight:"auto"}}>{z + " - " + x.total + (x.total != 1 ? " Players" : " Player")}</h1>
+            <h1 style={{marginLeft:"16%",marginRight:"auto"}}>{z + " - " + x.total + " " + (x.total != 1 ? this.state.units : this.state.unit)}</h1>
             <Col className="px-2 py-2">
                 <strong> Kills : </strong>{(x.kills/x.total).toFixed(2)} <br></br>
                 <strong> Deaths : </strong>{(x.deaths/x.total).toFixed(2)} <br></br>
@@ -110,7 +112,7 @@ class TeamStats extends React.Component{
         return             <>
         <Card style={{background:'rgba(50,50,50,0.5)'}}>
             <Card.Header onClick={()=>this.flip(this.state.show)} style={{background:"rgba(71, 17, 166,0.3)", marginLeft:'auto',marginRight:'auto',fontSize:'200%',fontWeight:'600',color:'tan',textShadow:'1px 0 black'}}>
-               Team Stats
+               {this.state.heading}
             </Card.Header>
             <Card.Body className="px-4">
             <Collapse in={this.state.show}>
@@ -123,4 +125,4 @@ class TeamStats extends React.Component{
         </>
     }
 
-} export default TeamStats
+} export default StatsPanel

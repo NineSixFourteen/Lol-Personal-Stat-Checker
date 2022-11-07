@@ -37,7 +37,6 @@ class Match extends React.Component {
     }
 
     setRows(num){
-        console.log(num)
         let x = []
         num = parseInt(num)
         let y = Array.apply(0, Array(num));
@@ -96,7 +95,6 @@ class Match extends React.Component {
                 </Form.Select>
                 {this.state.buttons}
                 </Form>
-                
             </Card.Header>
             <Card.Body>
                 {this.state.stats}
