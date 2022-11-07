@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -162,11 +164,15 @@ public class AverController {
         for(String mat : matches){
             List<MatchOverall1> m1 = overall1.findByMatchID(mat);
             List<MatchOverall2> m2 = overall2.findByMatchID(mat);
+            String team = m1.stream()
+                .filter(m -> m.getName().equals(name)) // filter to only the player
+                .collect(Collectors.toList()) //convert to list
+                .get(0).getTeam(); // get Team of index 0 which is the player
             if(m1.size() != m2.size()){
                 System.out.println("HELP THEY ARE NOT THE SAME M1: " + m1.size() + " AND M2: " + m2.size());
             }
             for(int i = 0; i < m1.size();i++){
-                if(!m1.get(i).getName().equals(name)){
+                if(!m1.get(i).getName().equals(name) && m1.get(i).getTeam().equals(team)){
                     MatchOverall mo = new MatchOverall(m1.get(i),m2.get(i));
                     match.get(0).add(mo);
                     if(m1.get(i).getPosition().trim().length() == 0){

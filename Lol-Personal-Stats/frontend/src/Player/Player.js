@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import logo from '../photos/logo.png';
 import "bootstrap/dist/css/bootstrap.min.css"
-import Last10 from './Comps/Last10';
+import MatchHistory from './Comps/MatchHistry';
 import ChampStats from './Comps/ChampStats';
 import StatsPanel from './Comps/StatsPanel';
 import StatsRow from './Comps/StatsRow';
@@ -37,11 +37,10 @@ class Match extends React.Component {
         })
         const histroy = await fetch('/get/Player/last10?name=' + id);
         const histroyBody = await histroy.json();
-        const lastBody = this.getLast10(histroyBody);
         const topChamps = await fetch('/get/Champ/topChamps?name=' + id);
         const topChampBody = await topChamps.json();
         let x = this.fixObj(topChampBody)
-        if(lastBody.length == 0){
+        if(histroyBody.length == 0){
             //TODO Player Not Found
             this.setState({last10:
                 (
@@ -51,25 +50,17 @@ class Match extends React.Component {
         } else {
         this.setState({last10:
         <Row>
-            <Col><Last10 Last10={lastBody} player={id} /></Col>
+            <Col><MatchHistory MatchHistory={histroyBody} player={id} /></Col>
         </Row>})
         this.setState({champs:
             <Row>
                 <Col><ChampStats topChamps={x} player={id} /></Col>
             </Row>})
         this.setState({team:
-            <StatsRow id={id} heading="wew" />
+            <StatsRow id={id} heading="Stats" />
         })
     }}
-    
-    getLast10(list){
-        let i = 0; 
-        let z = []
-        while(i < 10){
-            z[i] = list[i++];
-        }
-        return z;
-    }
+
 
     fixObj(obj){
         let x = []

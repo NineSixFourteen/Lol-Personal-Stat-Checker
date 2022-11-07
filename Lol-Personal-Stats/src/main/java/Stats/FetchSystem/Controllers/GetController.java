@@ -69,9 +69,9 @@ public class GetController {
     private List<String> last10(List<MatchHistory> mh) {
         Comparator<MatchHistory> byDate = (MatchHistory mh1, MatchHistory mh2) -> mh2.getMatchID().compareTo(mh1.getMatchID());
         mh.sort(byDate);
-        int len = mh.size() < 10 ? mh.size() : 10;
+        int len = mh.size() < 100 ? mh.size() : 100;
         List<String> m = new ArrayList<>();
-        for(int i = 0 ;  i < len; i++){
+        for(int i = 0 ;  i < len ; i++){
             m.add(mh.get(i).getMatchID());
         }
         return m;
