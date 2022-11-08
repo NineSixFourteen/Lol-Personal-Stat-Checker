@@ -35,7 +35,7 @@ class Match extends React.Component {
             champs: "",
             team: ""
         })
-        const histroy = await fetch('/get/Player/last10?name=' + id);
+        const histroy = await fetch('get/Player/matches?name=' + id);
         const histroyBody = await histroy.json();
         const topChamps = await fetch('/get/Champ/topChamps?name=' + id);
         const topChampBody = await topChamps.json();

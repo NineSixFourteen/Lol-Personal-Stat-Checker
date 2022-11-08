@@ -256,7 +256,7 @@ class ChampStats extends React.Component{
                     </Row>
                     <Row className="baba px-1"  style={{background:"rgba(0,10,60,0.5)",border:"outset", color:"white", borderColor:"black", fontSize:"100%"}}>
                         <Row>
-                            <h3 style={{justifyContent:"center", marginLeft:"auto", marginRight:"auto"}}> <stong> {champ + ": "} </stong> {x.total + " Games Played"}</h3>
+                            <h3 style={{justifyContent:"center", marginLeft:"auto", marginRight:"auto"}}> <strong> {champ + ": "} </strong> {x.total + " Games Played"}</h3>
                         </Row>
                         <Row>
                         <Col>

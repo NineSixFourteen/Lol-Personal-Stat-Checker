@@ -25,7 +25,9 @@ class MatchHistory extends React.Component{
             body: <h1>re</h1>,
             show: true,
             msg: "Hide",
-            start: 0
+            start: 0,
+            filterType: "0",
+            filter: ""
           };
     }
 
@@ -36,7 +38,8 @@ class MatchHistory extends React.Component{
     get10(list,start){
         let i = 0; 
         let z = []
-        while(i < 10){
+        let size = list.length < 5 ? list.length : 5
+        while(i < size){
             z[i++] = list[start++];
         }
         return z;
@@ -124,6 +127,14 @@ class MatchHistory extends React.Component{
         this.setState({show:x, msg:m})
     }
 
+    async send(){
+        const histroy = await fetch('get/Player/matches?name=' + this.state.player + "&filterType=" + this.state.filterType + "&filter=" + this.state.filter);
+        const histroyBody = await histroy.json();
+        console.log(histroyBody)
+        this.setState({MatchHistory: histroyBody})
+        this.display(histroyBody, this.state.player, 0)
+    }
+
 
     render(){
         return (
@@ -136,17 +147,30 @@ class MatchHistory extends React.Component{
                 <Collapse in={this.state.show}>
                     <div id="example-collapse-text">
                         <Row>
-                            <Form>
-                            <ButtonGroup >
-                                <Button
+                            <Form className="d-flex">
+                                <ButtonGroup>
+                                <Button 
                                 onClick={() => this.display(this.state.MatchHistory, this.state.player, this.state.start < 5 ? 0 : this.state.start - 5)}>
                                     Prev
                                 </Button>
-                                <Button
+                                <Button 
                                  onClick={() => this.display(this.state.MatchHistory, this.state.player, this.state.start + 15 > this.state.MatchHistory.length ? this.state.MatchHistory.length - 10 : this.state.start + 5)}>
                                     Next
                                 </Button>
-                            </ButtonGroup>
+                                </ButtonGroup>
+                                <Form.Select style={{width:"20%"}}
+                                    onChange={(e) => this.setState({filterType: e.target.value})}
+                                    className="mx-2">
+                                        <option>Select Filter</option>
+                                        <option value="0">Champion Filter</option>
+                                        <option value="1">Position Filter</option>
+                                        <option value="2">Champion And Position Filter</option>
+                                    </Form.Select>
+                                    <Form.Control className="mx-2" style={{width:"30%"}} placeholder="Enter Filter Info"
+                                    onChange={(e) => this.setState({filter: e.target.value})} />
+                                    <Button onClick={() => this.send()}>
+                                        Go
+                                    </Button>
                             </Form>
                         </Row>
                         {this.state.body}

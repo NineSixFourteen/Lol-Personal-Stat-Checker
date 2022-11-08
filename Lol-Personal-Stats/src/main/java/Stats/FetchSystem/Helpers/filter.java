@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import Stats.FetchSystem.Storage.Entitys.MatchHistory;
+import Stats.FetchSystem.Storage.Entitys.MatchOverall1;
 import Stats.FetchSystem.Storage.Other.MatchRecord;
 import Stats.FetchSystem.Storage.Other.PlayerRecord;
 
@@ -48,5 +49,34 @@ public class filter {
         }
         return "";
     }
+
+    public static List<MatchOverall1> includeOnlyChamps(List<MatchOverall1> mo1, String[] champs) {
+        return mo1.stream() 
+        .filter(player -> contains(champs, player.getChampion()))
+        .collect(Collectors.toList());
+    }
+
+    public static List<MatchOverall1> incldeOnlyPositions(List<MatchOverall1> mo1, String[] pos) {
+        return mo1.stream() 
+        .filter(player -> contains(pos, player.getPosition()))
+        .collect(Collectors.toList());
+    }
+
+    public static List<MatchOverall1> includeOnlyChampsinPositions(List<MatchOverall1> mo1, String[] champs ,String[] pos) {
+        return mo1.stream() 
+        .filter(player -> contains(pos, player.getPosition()) && contains(champs, player.getChampion()) )
+        .collect(Collectors.toList());
+    }
     
+
+    //Helpers
+
+    private static boolean contains(String[] list, String goal){
+        for(String item : list){
+            if(item.trim().equals(goal)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

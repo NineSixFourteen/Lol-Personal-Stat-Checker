@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import Stats.FetchSystem.Helpers.Helper;
+import Stats.FetchSystem.Helpers.filter;
 import Stats.FetchSystem.Storage.Entitys.MatchHistory;
 import Stats.FetchSystem.Storage.Entitys.MatchInterval;
 import Stats.FetchSystem.Storage.Entitys.MatchOverall1;
@@ -49,16 +50,41 @@ public class GetController {
         return new PlayerGameRecord(mh, mo1,mo2, intervals);
     }
 
-    @GetMapping("/get/Player/last10")
+    @GetMapping("/get/Player/matches")
     public @ResponseBody List<MatchRecord> getPlayerLast10(
-        @RequestParam(name = "name", required = false, defaultValue = "") String name )
+        @RequestParam(name = "name", required = true) String name,
+        @RequestParam(name = "filterType", required = false, defaultValue = "-1") String type,
+        @RequestParam(name = "filter", required = false, defaultValue = "") String f )
     {
+        System.out.println(type + " " + f);
         List<MatchOverall1> mo1 = overall1.findByName(name);
+        switch(type){
+            case "0":
+                String[] champs = f.split(",");
+                mo1 = filter.includeOnlyChamps(mo1,champs);
+                break;
+            case "1":
+                String[] pos = f.split(",");
+                mo1 = filter.incldeOnlyPositions(mo1,pos);
+                break;
+            case "2":
+                String[] parts = f.split("-");
+                String[] poss; 
+                if(parts.length == 1){
+                    poss = new String[]{""};
+                } else{
+                    poss = parts[1].split(","); 
+                }
+                String[] cha = parts[0].split(","); 
+                
+                mo1 = filter.includeOnlyChampsinPositions(mo1,cha, poss);
+                break;
+        }
         List<MatchHistory> mh = new ArrayList<>();
         for(MatchOverall1 m1 : mo1){
             mh.add(history.findByMatchID(m1.getMatchID()).get(0));
         }
-        List<String> last10 = last10(mh);
+        List<String> last10 = getItems(mh, 100);
         ArrayList<MatchRecord> games = new ArrayList<>();
         for(String id : last10){
             games.add(getMatchOffline(id));
@@ -66,10 +92,10 @@ public class GetController {
         return games;
     }
 
-    private List<String> last10(List<MatchHistory> mh) {
+    private List<String> getItems(List<MatchHistory> mh,int size) {
         Comparator<MatchHistory> byDate = (MatchHistory mh1, MatchHistory mh2) -> mh2.getMatchID().compareTo(mh1.getMatchID());
         mh.sort(byDate);
-        int len = mh.size() < 100 ? mh.size() : 100;
+        int len = mh.size() < size ? mh.size() : size;
         List<String> m = new ArrayList<>();
         for(int i = 0 ;  i < len ; i++){
             m.add(mh.get(i).getMatchID());
