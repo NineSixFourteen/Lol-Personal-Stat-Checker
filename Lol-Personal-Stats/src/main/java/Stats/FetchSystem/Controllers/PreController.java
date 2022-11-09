@@ -1,8 +1,6 @@
 package Stats.FetchSystem.Controllers;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +8,13 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import Stats.FetchSystem.Helpers.Helper;
-import Stats.FetchSystem.Storage.Entitys.MatchHistory;
-import Stats.FetchSystem.Storage.Entitys.MatchInterval;
 import Stats.FetchSystem.Storage.Entitys.MatchOverall1;
 import Stats.FetchSystem.Storage.Entitys.MatchOverall2;
 import Stats.FetchSystem.Storage.Other.AverageMatch;
 import Stats.FetchSystem.Storage.Other.MatchOverall;
-import Stats.FetchSystem.Storage.Other.MatchRecord;
-import Stats.FetchSystem.Storage.Other.PlayerGameRecord;
 import Stats.FetchSystem.Storage.Repository.MatchHistoryRespository;
 import Stats.FetchSystem.Storage.Repository.MatchIntervalRespository;
 import Stats.FetchSystem.Storage.Repository.MatchOverall1Respository;
@@ -40,11 +32,11 @@ public class PreController {
     @Autowired 
     MatchHistoryRespository history;
 
-    private List<AverageMatch> TotalAveragePosition;
+    private List<AverageMatch> TotalPosition;
 
     @EventListener(ApplicationReadyEvent.class)
     public void doSomethingAfterStartup() {
-        TotalAveragePosition = getTotalAverage();
+        TotalPosition = getTotalAverage();
     }
 
     private List<AverageMatch> getTotalAverage() {
@@ -68,7 +60,7 @@ public class PreController {
             for(int i = 0; i < m1.size();i++){
                 MatchOverall mo = new MatchOverall(m1.get(i),m2.get(i));
                 match.get(0).add(mo);
-                if(m1.get(i).getPosition().trim().length() == 0){
+                if(m1.get(i).getPosition().trim().length() != 0){
                     match.get(1).add(mo);
                 } else {
                     match.get(2).add(mo);
@@ -90,11 +82,18 @@ public class PreController {
         return match;
     }
         
-    @GetMapping("/pre/averagePos")
-    public @ResponseBody List<AverageMatch> getAveragePos(){
-        return TotalAveragePosition;
+    @GetMapping("/pre/Pos")
+    public @ResponseBody List<AverageMatch> getPos(){
+        return TotalPosition;
     }
 
+    @GetMapping("/pre/averagePos")
+    public @ResponseBody List<AverageMatch> getAveragePos(){
+        List<AverageMatch> matches = new ArrayList<>();
+        for(AverageMatch match: TotalPosition){
+            matches.add(match.build());
+        }
+        return matches;
+    }
 
-    
 }

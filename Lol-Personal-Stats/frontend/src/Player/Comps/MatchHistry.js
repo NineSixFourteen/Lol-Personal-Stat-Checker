@@ -135,7 +135,6 @@ class MatchHistory extends React.Component{
         this.display(histroyBody, this.state.player, 0)
     }
 
-
     render(){
         return (
             <>

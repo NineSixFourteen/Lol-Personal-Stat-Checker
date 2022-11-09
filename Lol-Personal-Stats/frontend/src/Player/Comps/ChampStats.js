@@ -188,8 +188,8 @@ class ChampStats extends React.Component{
                             <Nav>
                                 <Nav.Link style={{background:this.getCur(-1, 0),width:"47%"}} onClick={() => this.showChampList(0)}>  Name  </Nav.Link>
                                 <Nav.Link style={{background:this.getCur(-1, 1),width:"18%"}} onClick={() => this.showChampList(1)}>  Total </Nav.Link>
-                                <Nav.Link style={{background:this.getCur(-1, 2),width:"18%"}} onClick={() => this.showChampList(2)}> SR </Nav.Link>
-                                <Nav.Link style={{background:this.getCur(-1, 2),width:"17%"}} onClick={() => this.showChampList(3)}>  ARAM </Nav.Link>
+                                <Nav.Link style={{background:this.getCur(-1, 2),width:"18%"}} onClick={() => this.showChampList(2)}>  SR    </Nav.Link>
+                                <Nav.Link style={{background:this.getCur(-1, 2),width:"17%"}} onClick={() => this.showChampList(3)}>  ARAM  </Nav.Link>
                             </Nav>
                         </Row>
                         <Row>
@@ -236,7 +236,6 @@ class ChampStats extends React.Component{
                                 }}>
                                     Search
                                 </Button>
-   
                                 <Button variant="primary"  style={{width:"50%"}}
                                 onClick={ () => {
                                     this.showChampList();

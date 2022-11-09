@@ -23,7 +23,6 @@ public class SendMatches {
             SendMatch(recent);
         }
         SendClean();
-        
     }
 
     private static void SendClean() {

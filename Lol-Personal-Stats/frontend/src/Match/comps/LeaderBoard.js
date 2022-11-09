@@ -41,11 +41,11 @@ class LeaderBoard extends React.Component{
                 case "CS": x.push({id:match1.name,val:match1.cs});break;
                 case "Gold": x.push({id:match1.name,val:match1.gold});break;
                 case "Ability Uses": x.push({id:match1.name,val:match2.abiltyUses});break;
-                case "Contorl Wards Bought": x.push({id:match1.name,val:match2.controlWardsBought});break;
+                case "Control Wards Bought": x.push({id:match1.name,val:match2.controlWardsBought});break;
                 case "Dodged Skill Shots": x.push({id:match1.name,val:match2.dodgedSkillShots});break;
                 case "Enemy CC": x.push({id:match1.name,val:match2.enemyCCd});break;
-                case "Lane Minions at 10": x.push({id:match1.name,val:match2.landMinionsAt10});break;
-                case "Peak CS": x.push({id:match1.name,val:match2.peakCsLead});break;
+                case "Lane Minions at 10": x.push({id:match1.name,val:match2.peakCsLead});break;
+                case "Peak CS": x.push({id:match1.name,val:match2.landMinionsAt10});break;
                 case "Peak Kill Lead": x.push({id:match1.name,val:match2.peakKillDiff});break;
                 case "Pings": x.push({id:match1.name,val:match2.pings});break;
                 case "Shield on Teamates": x.push({id:match1.name,val:match2.sheildOnTeamates});break;
@@ -103,7 +103,7 @@ class LeaderBoard extends React.Component{
                         <NavDropdown.Item onClick={()=>this.setBoard(this.state.players,"CS","Asc")}>CS </NavDropdown.Item>
                         <NavDropdown.Item onClick={()=>this.setBoard(this.state.players,"Gold","Asc")}>Gold </NavDropdown.Item>
                         <NavDropdown.Item onClick={()=>this.setBoard(this.state.players,"Ability Uses","Asc")}>Ability Uses </NavDropdown.Item>
-                        <NavDropdown.Item onClick={()=>this.setBoard(this.state.players,"Contorl Wards Bought","Asc")}>Contorl Wards Bought</NavDropdown.Item>
+                        <NavDropdown.Item onClick={()=>this.setBoard(this.state.players,"Control Wards Bought","Asc")}>Control Wards Bought</NavDropdown.Item>
                         <NavDropdown.Item onClick={()=>this.setBoard(this.state.players,"Dodged Skill Shots","Asc")}>Dodged Skill Shots</NavDropdown.Item>
                         <NavDropdown.Item onClick={()=>this.setBoard(this.state.players,"Enemy CC","Asc")}>Enemy CC</NavDropdown.Item>
                         <NavDropdown.Item onClick={()=>this.setBoard(this.state.players,"Lane Minions at 10","Asc")}>Lane Minions at 10</NavDropdown.Item>

@@ -76,8 +76,8 @@ class Stats extends React.Component{
                     <strong>Heal On Teamates : </strong>{match2.healOnTeamates} <br></br>
                     <strong>Hit Skill Shots :</strong> {match2.hitSkillShots} <br></br>
                     <strong>Jungle Monsters Killed : </strong>{match2.jungleMonstersKilled} <br></br>
-                    <strong>lane Minions At 10 Minutes :</strong> {match2.landMinionsAt10} <br></br>
-                    <strong>Peak CS Lead : </strong>{match2.peakCsLead} <br></br>
+                    <strong>lane Minions At 10 Minutes :</strong> {match2.peakCsLead} <br></br>
+                    <strong>Peak CS Lead : </strong>{match2.landMinionsAt10} <br></br>
                     <strong>Peak Kill Lead : </strong>{match2.peakKillDiff} <br></br>
                     <strong>Picks With Alley :</strong> {match2.picksWAlley} <br></br>
                     <strong>Pings :</strong> {match2.pings} <br></br>
@@ -141,7 +141,6 @@ class Stats extends React.Component{
             </Container>
         )})
     }
-
 
     render() {
         return (    

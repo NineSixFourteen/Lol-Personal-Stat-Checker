@@ -30,7 +30,7 @@ class StatsRow extends React.Component{
         const avgTeam = await fetch('/average/Player/Team?name=' + this.state.name);
         const avgTeamBody = await avgTeam.json();
         let y = <StatsPanel items={avgTeamBody} cur={2} heading={"Average Team"} unit={"Game"} units={"Games"} />
-        const averagePlay = await fetch("/pre/averagePos");
+        const averagePlay = await fetch("/pre/Pos");
         const averPBody = await averagePlay.json();
         let z = <StatsPanel items={averPBody} cur={2} heading={"Average Player"} unit={"Game"} units={"Games"} />
         this.setState(

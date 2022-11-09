@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,7 +150,6 @@ public class AverController {
         return match;
     }
 
-    
     @GetMapping("/average/Player/Team")
     public @ResponseBody List<AverageMatch> getPlayerTeam(
         @RequestParam(name = "name", required = false, defaultValue = "") String name) {
@@ -197,8 +195,54 @@ public class AverController {
         }
         return match;
     }
-    //Helper 
 
+    @GetMapping("/average/Stats")
+    public @ResponseBody AverageMatch getStats(
+        @RequestParam(name = "name",  required = true)  String name,
+        @RequestParam(name = "champ", required = true)  String champ,
+        @RequestParam(name = "pos",   required = true)  String pos,
+        @RequestParam(name = "gms",   required = true)  String gms )
+    {
+        System.out.println(name);
+        System.out.println(champ);
+        System.out.println(pos);
+        System.out.println(gms);
+        List<MatchOverall1> matches;
+        if(name == "all"){
+            matches = new ArrayList<>();
+            var x = overall1.findAll();
+            for(var y : x){
+                matches.add(y);
+            }
+        } else {
+            matches = overall1.findByName(name);
+        } 
+        if(!champ.equals("all")){
+            String[] champs = champ.split(",");
+            matches = filter.includeOnlyChamps(matches, champs);
+        }
+        System.out.println(matches.size());
+        if(!pos.equals("all")){
+            String[] poss = pos.split(",");
+            matches = filter.incldeOnlyPositions(matches, poss); 
+        }
+        System.out.println(matches.size());
+        if(!gms.equals("all")){
+            String[] gmss = gms.split(",");
+            matches = filter.incldeOnlyGameMode(matches, gmss,history.findAll()); 
+        }
+        System.out.println(matches.size());
+        AverageMatch am = new AverageMatch();
+        for(MatchOverall1 mo1 : matches){
+            MatchOverall2 m2 = overall2.findByMatchIDAndName(mo1.getMatchID(),mo1.getName()).get(0);
+            MatchOverall  mo = new MatchOverall(mo1, m2);
+            am.add(mo);
+        }
+        am = am.build();
+        return am;
+    }
+
+    //Helper 
     private HashMap<String,String> getMatchIdAndName(List<MatchOverall1> mo1) {
         HashMap<String,String> MatchIds = new HashMap<>();
         for(MatchOverall1 m1 : mo1){
