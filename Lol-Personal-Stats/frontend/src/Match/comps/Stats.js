@@ -40,7 +40,6 @@ class Stats extends React.Component{
                 (
                 <Row style={{color:'white'}}>
                     <Col style={{textSize:"300%"}}>
-                        <strong>Stats</strong>  <br></br>
                         <strong> Name </strong> : {match1.name} <br></br>
                         <strong> Champion : </strong>{match1.champion} <br></br>
                         <strong> Kills : </strong>{match1.kills} <br></br>
@@ -53,6 +52,11 @@ class Stats extends React.Component{
                         <strong> Barons Taken : </strong> {match1.baronsTaken} <br></br>
                         <strong> Dragons Taken : </strong>{match1.dragonsTaken} <br></br>
                         <strong> Objective Steals :</strong> {match1.objectiveSteals} <br></br>
+                        <strong> Solo Kills : </strong>{match2.soloKills} <br></br>
+                        <strong> Stealth Wards Placed :</strong> {match2.stealthWardsPlaced} <br></br>
+                        <strong> Stolen Buffs : </strong>{match2.stolenBuffs} <br></br>
+                        <strong> Time CC others : </strong>{match2.timeCCother} <br></br>
+                        <strong> Turret Plates :</strong> {match2.turretPlates} <br></br>
                         <strong> Turret Damage :</strong> {match1.turretDamage} <br></br>
                         <strong> Turrets Taken :</strong> {match1.turretsTaken} <br></br>
                         <strong> Wards Placed : </strong> {match1.wardsPlaced} <br></br>
@@ -60,7 +64,6 @@ class Stats extends React.Component{
                         <strong> Vision Score  : </strong> {match1.visionScore} <br></br>
                     </Col>
                     <Col>
-                    <strong>Stats - Fun </strong><br></br>
                     <strong>Ability Uses : </strong>{match2.abiltyUses} <br></br>
                     <strong>Bounty Level :</strong> {match2.bountyL} <br></br>
                     <strong>CC And Kills W Alley : </strong>{match2.ccandKillwAlley} <br></br>
@@ -83,11 +86,7 @@ class Stats extends React.Component{
                     <strong>Pings :</strong> {match2.pings} <br></br>
                     <strong>Shield On Teamates : </strong>{match2.sheildOnTeamates} <br></br>
                     <strong>Skill Shots Early: </strong>{match2.skillShotsEarly} <br></br>
-                    <strong>Solo Kills : </strong>{match2.soloKills} <br></br>
-                    <strong>Stealth Wards Placed :</strong> {match2.stealthWardsPlaced} <br></br>
-                    <strong>Stolen Buffs : </strong>{match2.stolenBuffs} <br></br>
-                    <strong>Time CC others : </strong>{match2.timeCCother} <br></br>
-                    <strong>Turret Plates :</strong> {match2.turretPlates} <br></br>
+
                     </Col>
                 </Row>
             )});

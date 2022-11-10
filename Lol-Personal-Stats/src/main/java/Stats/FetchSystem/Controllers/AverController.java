@@ -55,8 +55,6 @@ public class AverController {
                 mo1.add(overall1.findByMatchIDAndName(matchHistory.getMatchID(), name).get(0));
              } 
         }
-        System.out.println(mo1.size());
-        System.out.println(mo2.size());
         AverageMatch am = new AverageMatch();
         for(int i = 0; i < mo1.size(); i++){
             am.add(new MatchOverall(mo1.get(i), mo2.get(i)));
@@ -203,10 +201,6 @@ public class AverController {
         @RequestParam(name = "pos",   required = true)  String pos,
         @RequestParam(name = "gms",   required = true)  String gms )
     {
-        System.out.println(name);
-        System.out.println(champ);
-        System.out.println(pos);
-        System.out.println(gms);
         List<MatchOverall1> matches;
         if(name == "all"){
             matches = new ArrayList<>();
@@ -221,17 +215,14 @@ public class AverController {
             String[] champs = champ.split(",");
             matches = filter.includeOnlyChamps(matches, champs);
         }
-        System.out.println(matches.size());
         if(!pos.equals("all")){
             String[] poss = pos.split(",");
             matches = filter.incldeOnlyPositions(matches, poss); 
         }
-        System.out.println(matches.size());
         if(!gms.equals("all")){
             String[] gmss = gms.split(",");
             matches = filter.incldeOnlyGameMode(matches, gmss,history.findAll()); 
         }
-        System.out.println(matches.size());
         AverageMatch am = new AverageMatch();
         for(MatchOverall1 mo1 : matches){
             MatchOverall2 m2 = overall2.findByMatchIDAndName(mo1.getMatchID(),mo1.getName()).get(0);
@@ -242,7 +233,86 @@ public class AverController {
         return am;
     }
 
+    @GetMapping("/average/Team")
+    public @ResponseBody AverageMatch getTeam(
+        @RequestParam(name = "name",   required = true)  String name,
+        @RequestParam(name = "champ",  required = true)  String champ,
+        @RequestParam(name = "pos",    required = true)  String pos,
+        @RequestParam(name = "gms",    required = true)  String gms, 
+        @RequestParam(name = "team",   required = true)  String team,
+        @RequestParam(name = "Oname",  required = true)  String Oname,
+        @RequestParam(name = "Ochamp", required = true)  String Ochamp,
+        @RequestParam(name = "Opos",   required = true)  String Opos,
+        @RequestParam(name = "Ogms",   required = true)  String Ogms
+    ){
+        List<MatchOverall1> matches;
+        if(name == "all"){
+            matches = new ArrayList<>();
+            var x = overall1.findAll();
+            for(var y : x){
+                matches.add(y);
+            }
+        } else {
+            matches = overall1.findByName(name);
+        } 
+        if(!champ.equals("all")){
+            String[] champs = champ.split(",");
+            matches = filter.includeOnlyChamps(matches, champs);
+        }
+        if(!pos.equals("all")){
+            String[] poss = pos.split(",");
+            matches = filter.incldeOnlyPositions(matches, poss); 
+        }
+        if(!gms.equals("all")){
+            String[] gmss = gms.split(",");
+            matches = filter.incldeOnlyGameMode(matches, gmss,history.findAll()); 
+        }
+        List<String> matchs = new ArrayList<>();
+        for(MatchOverall1 mo1 : matches){
+            matchs.add(mo1.getMatchID());
+        }
+        AverageMatch am = new AverageMatch();
+        for(String match : matchs){
+            String side;
+            if(team.equals("true")){
+                side = getSide(match, name);
+            } else {
+                side = getSide(match, name) == "Blue" ? "Red" : "Blue";
+            }
+            if(!Ogms.equals("all")){
+                String[] Ogmss = Ogms.split(",");
+                if(!filter.contains(Ogmss, history.findByMatchID(match).get(0).getGameMode())){
+                    continue;
+                }
+            }
+            List<MatchOverall1> mo1 = overall1.findByMatchID(match);
+            for(MatchOverall1 m1 : mo1 ){
+                if(!side.equals(m1.getTeam())){
+                    continue;
+                }
+                if(!Oname.equals("all") && !Oname.equals(m1.getName())){
+                    continue;
+                }
+                if(!Ochamp.equals("all") && !Ochamp.equals(m1.getChampion())){
+                    continue;
+                }
+                if(!Opos.equals("all") && !filter.contains(Opos.split(","), m1.getPosition())){
+                    continue;
+                }
+                am.add( 
+                    new MatchOverall(m1, overall2.findByMatchIDAndName(m1.getMatchID(), m1.getName()).get(0))
+                );
+            }
+        }
+        return am.build();
+    }
+
+
     //Helper 
+    private String getSide(String match2, String name) {
+        return overall1.findByMatchIDAndName(match2, name).get(0).getTeam();
+    }
+
     private HashMap<String,String> getMatchIdAndName(List<MatchOverall1> mo1) {
         HashMap<String,String> MatchIds = new HashMap<>();
         for(MatchOverall1 m1 : mo1){

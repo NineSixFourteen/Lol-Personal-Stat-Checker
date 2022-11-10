@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col';
 import logo from '../photos/logo.png';
 import CompareStats from './comps/CompareStats';
 import StatsPanel from './comps/StatsPanel';
+import CompareTeam from './comps/CompareTeam'
 
 class Overall extends React.Component {
 
@@ -69,6 +70,9 @@ class Overall extends React.Component {
                         </Row>
                         <Row className = "px-4 my-5">
                            <CompareStats/>
+                        </Row>
+                        <Row className = "px-4 my-5">
+                            <CompareTeam/>
                         </Row>
                     </Container>
             </header>

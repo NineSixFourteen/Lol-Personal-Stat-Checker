@@ -84,7 +84,7 @@ public class filter {
 
 
     //Helpers
-    private static boolean contains(String[] list, String goal){
+    public static boolean contains(String[] list, String goal){
         for(String item : list){
             if(item.trim().equals(goal)){
                 return true;

@@ -8,7 +8,7 @@ import Jungle from "../../photos/Jungle.png"
 import Mid from "../../photos/Mid.png"
 import Bot from "../../photos/Bot.png"
 import Support from "../../photos/Support.png"
-import Question from "../../photos/Question.png"
+import Question from "../../photos/ARAM.png"
 import Victory from "../../photos/Victory.png"
 import Defeat from "../../photos/Defeat.png"
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
