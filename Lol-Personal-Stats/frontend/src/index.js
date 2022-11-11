@@ -5,6 +5,7 @@ import Match from './Match/Match';
 import Home from './Home/Home';
 import Overall from './Overall/Overall';
 import Player from './Player/Player';
+import Admin from  './Admin/Admin';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter,
@@ -21,6 +22,7 @@ root.render(
       <Route exact path="/match" element={<Match />}></Route>
       <Route exact path="/overall" element={<Overall />}></Route>
       <Route exact path="/player" element={<Player />}></Route>
+      <Route exact path="/admin" element={<Admin />}> </Route> 
     </Routes>
   </BrowserRouter>
 );

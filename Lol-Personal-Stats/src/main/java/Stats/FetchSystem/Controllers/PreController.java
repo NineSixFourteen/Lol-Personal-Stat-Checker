@@ -56,30 +56,48 @@ public class PreController {
             List<MatchOverall2> m2 = overall2.findByMatchID(mat);
             if(m1.size() != m2.size()){
                 System.out.println("HELP THEY ARE NOT THE SAME M1: " + m1.size() + " AND M2: " + m2.size());
-            }
-            for(int i = 0; i < m1.size();i++){
-                MatchOverall mo = new MatchOverall(m1.get(i),m2.get(i));
-                match.get(0).add(mo);
-                if(m1.get(i).getPosition().trim().length() != 0){
-                    match.get(1).add(mo);
-                } else {
-                    match.get(2).add(mo);
-                }
-                switch(m1.get(i).getPosition()){
-                    case "TOP":
-                        match.get(3).add(mo);break;
-                    case "JUNGLE":
-                        match.get(4).add(mo);break;
-                    case "MIDDLE":
-                        match.get(5).add(mo);break;
-                    case "BOTTOM":
-                        match.get(6).add(mo);break;
-                    case "SUPPORT":
-                        match.get(7).add(mo);break;
+                System.out.println(mat);
+                deleteRecords(mat);
+            } else {
+                for(int i = 0; i < m1.size();i++){
+                    MatchOverall mo = new MatchOverall(m1.get(i),m2.get(i));
+                    match.get(0).add(mo);
+                    if(m1.get(i).getPosition().trim().length() != 0){
+                        match.get(1).add(mo);
+                    } else {
+                        match.get(2).add(mo);
+                    }
+                    switch(m1.get(i).getPosition()){
+                        case "TOP":
+                            match.get(3).add(mo);break;
+                        case "JUNGLE":
+                            match.get(4).add(mo);break;
+                        case "MIDDLE":
+                            match.get(5).add(mo);break;
+                        case "BOTTOM":
+                            match.get(6).add(mo);break;
+                        case "SUPPORT":
+                            match.get(7).add(mo);break;
+                    }
                 }
             }
         }
         return match;
+    }
+
+    private void deleteRecords(String dup) {
+        for(var x : match.findByMatchID(dup)){
+            match.deleteById(x.getId());
+        }
+        for(var x : history.findByMatchID(dup)){
+            history.deleteById(x.getId());
+        }
+        for(var x : overall1.findByMatchID(dup)){
+            overall1.deleteById(x.getId()); 
+        }
+        for(var x : overall2.findByMatchID(dup)){
+            overall2.deleteById(x.getId()); 
+        }
     }
         
     @GetMapping("/pre/Pos")

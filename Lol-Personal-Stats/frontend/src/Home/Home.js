@@ -41,6 +41,7 @@ render() {
                     <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="match"><h2>Match</h2></Nav.Link>
                     <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="player"><h2>Player</h2></Nav.Link>
                 </Nav>
+                <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="admin"> <h2> Admin</h2></Nav.Link>
                 </Container>
             </Navbar>
             <Container fluid>

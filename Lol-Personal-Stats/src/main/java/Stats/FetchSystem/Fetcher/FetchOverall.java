@@ -20,8 +20,10 @@ public class FetchOverall {
 
     public static MatchOverall getPlayer(JsonNode node,String id){
         MatchOverallBuilder mob = new MatchOverallBuilder();
-        System.out.println(node);
         JsonNode chal = node.get("challenges");
+        if(chal == null){
+            return mob.build();
+        }
         mob.setKDA(
             node.get("kills").asInt(), 
             node.get("deaths").asInt(),

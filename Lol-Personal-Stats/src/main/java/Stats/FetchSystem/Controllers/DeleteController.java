@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,28 +46,59 @@ public class DeleteController {
         overall2.deleteById(id);
         return "id has been deleted";
     }
+
+    @PostMapping("/delete/match")
+    public @ResponseBody String deleteMatch(@RequestParam String id){
+        deleteRecords(id);
+        return "Match has been deleted";
+    }
     @GetMapping("/clean")
     public @ResponseBody String clean(){
         List<String> ids = new ArrayList<>();
         List<String> dups = new ArrayList<>();
         for(MatchHistory mh : history.findAll()){
-            if(ids.contains(mh.getMatchID())){
+            if(ids.contains(mh.getMatchID()) && !dups.contains(mh.getMatchID())){
                 dups.add(mh.getMatchID());
+            } else {
+                ids.add(mh.getMatchID());
             }
-            ids.add(mh.getMatchID());
         }
         writeDups(dups);
         for(String dup : dups){
             deleteRecords(dup);
         }
-        for(String dup : dups){
-            getRecord(dup);
-        }
+        deleteNulls();
+        addGames(dups, dups.size());
         return "Cleaning complete";
     }
 
-    private void getRecord(String dup) {
-        MatchRecord x = Fetcher.getMatchRecord(dup);
+    private void deleteNulls() {
+        for(var x : match.findAll()){
+            if(x.getMatchID() == null){
+                match.deleteById(x.getId());
+            }
+        }
+        for(var x : overall1.findAll()){
+            if(x.getMatchID() == null){
+                overall1.deleteById(x.getId());
+            }
+        }
+        for(var x : overall2.findAll()){
+            if(x.getMatchId() == null){
+                overall2.deleteById(x.getId());
+            }
+        }
+        for(var x : history.findAll()){
+            if(x.getMatchID() == null){
+                history.deleteById(x.getId());
+            }
+        }
+    }
+    public boolean saveGame(String id){
+        MatchRecord x = Fetcher.getMatchRecord(id);
+        if(x == null){
+            return false; 
+        }
         history.save(x.getMatchHistory());
         for(PlayerRecord y : x.getPlayers()){
             overall1.save(y.getMo().getMatch1());
@@ -77,6 +109,26 @@ public class DeleteController {
                 match.save(interval);
             }
         }
+        return true;
+    }
+
+    public void addGames(List<String> games, int am ){
+        int i = 0; 
+        while(i < am){
+            if(saveGame(games.get(i))){
+                System.out.println("Saved Game " + games.get(i));
+                i++;
+            } else {
+                try {
+                    System.out.println("Failed Game " + games.get(i));
+                    TimeUnit.MINUTES.sleep(1);
+                    System.out.println("Reattempt Game " + games.get(i));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        System.out.println("Finished");
     }
 
 
@@ -109,6 +161,5 @@ public class DeleteController {
         for(var x : overall2.findByMatchID(dup)){
             overall2.deleteById(x.getId()); 
         }
-    
     }
 }
