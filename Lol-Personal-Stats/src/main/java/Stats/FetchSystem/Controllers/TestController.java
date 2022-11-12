@@ -38,6 +38,12 @@ public class TestController {
             "Found Overall2 : " + found2  + "\n" + 
             "Found Intervals : " + false  + "\n";
     }
+
+    @GetMapping("/ping")
+    public @ResponseBody String ping(){
+        System.out.println("ping");
+        return "pong";
+    }
     
     
 }

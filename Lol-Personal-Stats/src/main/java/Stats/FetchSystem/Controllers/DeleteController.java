@@ -18,6 +18,7 @@ import Stats.FetchSystem.Fetcher.Fetcher;
 import Stats.FetchSystem.Helpers.GetInfo;
 import Stats.FetchSystem.Storage.Entitys.MatchHistory;
 import Stats.FetchSystem.Storage.Entitys.MatchInterval;
+import Stats.FetchSystem.Storage.Entitys.MatchOverall1;
 import Stats.FetchSystem.Storage.Other.MatchRecord;
 import Stats.FetchSystem.Storage.Other.PlayerRecord;
 import Stats.FetchSystem.Storage.Repository.MatchHistoryRespository;
@@ -47,11 +48,25 @@ public class DeleteController {
         return "id has been deleted";
     }
 
-    @PostMapping("/delete/match")
+    @GetMapping("/delete/Match")
     public @ResponseBody String deleteMatch(@RequestParam String id){
+        System.out.println("Deleting " +id)  ;
         deleteRecords(id);
         return "Match has been deleted";
     }
+
+    @GetMapping("/delete/Player")
+    public @ResponseBody String deletePlayer(@RequestParam String name){
+        List<MatchOverall1> matches = overall1.findByName(name);
+        int i = 0;
+        for(MatchOverall1 mo1 : matches){
+            System.out.println("Deleting " + mo1.getMatchID())  ;
+            deleteRecords(mo1.getMatchID());
+            i++;
+        }
+        return "Deleted " + i + " games with player " + name;
+    }
+
     @GetMapping("/clean")
     public @ResponseBody String clean(){
         List<String> ids = new ArrayList<>();

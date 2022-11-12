@@ -32,6 +32,17 @@ class GetPanel extends React.Component{
                     <Card.Body className="px-4">
                     <Collapse in={this.state.show}>
                         <div id="example-collapse-text">
+                            <Nav bg = "dark" style={{fontSize:"115%",background:"rgba(0,10,10,0.8)"}}>
+                                <Nav.Link style={{width:"30%",background:"rgba(20,20,20,0.5)", fontSize:"150%"}} onClick={()=>this.setCur(0)}>Get Player Matches</Nav.Link>
+                                <Nav.Link style={{width:"35%",background:"rgba(20,20,20,0.5)", fontSize:"150%"}} onClick={()=>this.setCur(1)}>Get Player Top Champs</Nav.Link>
+                                <Nav.Link style={{width:"35%",background:"rgba(20,20,20,0.5)", fontSize:"150%"}} onClick={()=>this.setCur(1)}>Get Player Champs played</Nav.Link>
+                                <Nav.Link style={{width:"30%",background:"rgba(20,20,20,0.5)", fontSize:"150%"}} onClick={()=>this.setCur(1)}>Get Match</Nav.Link>
+                                <Nav.Link style={{width:"35%",background:"rgba(20,20,20,0.5)", fontSize:"150%"}} onClick={()=>this.setCur(1)}>Get Average Stats for Champ</Nav.Link>
+                                <Nav.Link style={{width:"35%",background:"rgba(20,20,20,0.5)", fontSize:"150%"}} onClick={()=>this.setCur(1)}>Get Average Stats for Positions</Nav.Link>
+                                <Nav.Link style={{width:"30%",background:"rgba(20,20,20,0.5)", fontSize:"150%"}} onClick={()=>this.setCur(1)}>Get Average Teamates</Nav.Link>
+                                <Nav.Link style={{width:"35%",background:"rgba(20,20,20,0.5)", fontSize:"150%"}} onClick={()=>this.setCur(1)}>Get Average Stats w/fitlers</Nav.Link>
+                                <Nav.Link style={{width:"35%",background:"rgba(20,20,20,0.5)", fontSize:"150%"}} onClick={()=>this.setCur(1)}>Get Average Team w/fitlers</Nav.Link>
+                            </Nav>
                             {this.state.body}
                         </div>
                     </Collapse>

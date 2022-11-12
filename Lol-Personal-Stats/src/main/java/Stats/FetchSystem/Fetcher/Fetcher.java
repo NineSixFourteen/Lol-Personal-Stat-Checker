@@ -113,7 +113,7 @@ public class Fetcher {
             String url = "https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Sckioon";
             final HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
             con.setRequestProperty( "X-Riot-Token", GetInfo.getAPIKey());
-            InputStream is = con.getInputStream();
+            con.getInputStream();
             return true;
         } catch(Exception e){
             return false;

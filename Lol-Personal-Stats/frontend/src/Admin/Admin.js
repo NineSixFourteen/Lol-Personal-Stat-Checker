@@ -35,8 +35,10 @@ class Admin extends React.Component{
                 <Nav.Link style={{color:'#cf663c', fontWeight:'300'}} href="admin"> <h2> Admin</h2></Nav.Link>
                 </Container>
             </Navbar>
-
             <Container>
+            <Row className = "my-5 px-4"> 
+                    <OtherPanel/>
+                </Row>
                 <Row className = "my-5 px-4"> 
                     <AddPanel/>
                 </Row>
@@ -45,9 +47,6 @@ class Admin extends React.Component{
                 </Row>
                 <Row className = "my-5 px-4"> 
                     <GetPanel />
-                </Row>
-                <Row className = "my-5 px-4"> 
-                    <OtherPanel/>
                 </Row>
             </Container>
         </>

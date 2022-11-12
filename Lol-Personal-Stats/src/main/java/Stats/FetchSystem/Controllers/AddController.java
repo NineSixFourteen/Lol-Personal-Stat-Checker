@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import Stats.FetchSystem.Fetcher.Fetcher;
 import Stats.FetchSystem.Storage.Entitys.MatchInterval;
 import Stats.FetchSystem.Storage.Other.MatchRecord;
@@ -30,7 +28,7 @@ public class AddController {
     @Autowired 
     MatchHistoryRespository history;
 
-    @PostMapping("/AddMatch")
+    @GetMapping("/add/Match")
     public @ResponseBody String index(@RequestParam String id){
         System.out.println(id);
         MatchRecord x = Fetcher.getMatchRecord(id);
@@ -69,11 +67,13 @@ public class AddController {
         return true;
     }
 
-    @GetMapping("/add/player")
+    @GetMapping("/add/Player")
     public @ResponseBody String addPlayer(
-        @RequestParam(name = "name", required = false, defaultValue = "") String name,
+        @RequestParam(name = "name", required = true) String name,
         @RequestParam(name = "amount", required = false, defaultValue = "50") String amount
     ){
+        System.out.println(name);
+        System.out.println(amount);
         int am; 
         String Msg = "";
         try{

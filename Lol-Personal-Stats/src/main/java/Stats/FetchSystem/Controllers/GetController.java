@@ -19,7 +19,6 @@ import Stats.FetchSystem.Storage.Entitys.MatchOverall1;
 import Stats.FetchSystem.Storage.Entitys.MatchOverall2;
 import Stats.FetchSystem.Storage.Other.MatchOverall;
 import Stats.FetchSystem.Storage.Other.MatchRecord;
-import Stats.FetchSystem.Storage.Other.PlayerGameRecord;
 import Stats.FetchSystem.Storage.Repository.MatchHistoryRespository;
 import Stats.FetchSystem.Storage.Repository.MatchIntervalRespository;
 import Stats.FetchSystem.Storage.Repository.MatchOverall1Respository;
@@ -38,18 +37,6 @@ public class GetController {
     @Autowired 
     MatchHistoryRespository history;
     
-    @GetMapping("/get/Player")
-    public @ResponseBody PlayerGameRecord getPlayer(
-        @RequestParam(name = "id", required = false, defaultValue = "") String id,
-        @RequestParam(name = "name", required = false, defaultValue = "") String name )
-    {
-        MatchHistory mh = history.findByMatchID(id).get(0);
-        MatchOverall1 mo1 = overall1.findByMatchIDAndName(id, name).get(0);
-        MatchOverall2 mo2 = overall2.findByMatchIDAndName(id, name).get(0);
-        List<MatchInterval> intervals = match.findByMatchIDAndName(id, name);
-        return new PlayerGameRecord(mh, mo1,mo2, intervals);
-    }
-
     @GetMapping("/get/Player/matches")
     public @ResponseBody List<MatchRecord> getPlayerLast10(
         @RequestParam(name = "name", required = true) String name,
@@ -182,65 +169,5 @@ public class GetController {
         ArrayList<ArrayList<MatchInterval>> intervals = Helper.seperateList(match.findByMatchID(id),names);
         return new MatchRecord(mh,mo, intervals);
     }
-
-    @GetMapping("/get/PlayerGames")
-    public @ResponseBody List<MatchRecord> getPlayerGames(
-        @RequestParam(name = "name", required = false, defaultValue = "") String name)
-    {
-        List<MatchOverall1> mo1 = overall1.findByName(name);
-        ArrayList<String> matchIDs = new ArrayList<>();
-        for(MatchOverall1 m1 : mo1){
-            matchIDs.add(m1.getMatchID());
-        } 
-        ArrayList<MatchRecord> records = new ArrayList<>();
-        for(String MatchID : matchIDs){
-            List<MatchOverall1> over1 = overall1.findByMatchID(MatchID);
-            ArrayList<String> names = new ArrayList<>();
-            for(MatchOverall1 over : over1){
-                names.add(over.getName());
-            }
-            records.add(
-                new MatchRecord(
-                    history.findByMatchID(MatchID).get(0),
-                    overall1.findByMatchID(MatchID), 
-                    overall2.findByMatchID(MatchID), 
-                    Helper.seperateList(match.findByMatchID(MatchID),names)
-                )
-            );
-        }
-        return records;
-    }
-
-    @GetMapping("/get/ChampGames")
-    public @ResponseBody List<MatchRecord> getChampGames(
-        @RequestParam(name = "name", required = false, defaultValue = "") String name)
-    {
-        List<MatchOverall1> mo1 = overall1.findByChampion(name);
-        ArrayList<String> matchIDs = new ArrayList<>();
-        for(MatchOverall1 m1 : mo1){
-            matchIDs.add(m1.getMatchID());
-        } 
-        ArrayList<MatchRecord> records = new ArrayList<>();
-        for(String MatchID : matchIDs){
-            List<MatchOverall1> over1 = overall1.findByMatchID(MatchID);
-            ArrayList<String> names = new ArrayList<>();
-            for(MatchOverall1 over : over1){
-                names.add(over.getName());
-            }
-            records.add(
-                new MatchRecord(
-                    history.findByMatchID(MatchID).get(0),
-                    overall1.findByMatchID(MatchID), 
-                    overall2.findByMatchID(MatchID), 
-                    Helper.seperateList(match.findByMatchID(MatchID),names)
-                )
-            );
-        }
-        return records;
-    }
-
-    //Helpers
-
- 
 
 }
