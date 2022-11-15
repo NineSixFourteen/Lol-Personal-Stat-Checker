@@ -37,3 +37,27 @@ Match Overall is the table that stores a players stats at the end of a game. It 
 - StolenBuffs(int) - the amount of enemy buffs the player stole
 - ControlWardsBought(int) - the number of times a player bought a control ward 
 - ControlWardsPlaced(int) - the number of times a player placed a control ward 
+- DodgedSkillShots - the number of skillshots that have narrowly missed a player 
+- HitSkillShots - the number of skillshots that have hit an enemy champion
+- JungleMostersKill - the amount of jungle monsters killed
+- EnemyJungleKilled - the amount of the enemy jungle a player has killed
+- EnemyCCd - the amount of times the player has crowed controlled an enemy i.e. stunned, rooted, suppressed etc
+- timeCCother - the amount of time that the player has crowed controlled an enemy 
+- SkillShotsEarly - the number of skill shots the player had hit by [x] minutes 
+- laneMinionsAt10 - the number of minions the player has killed by 10 minutes
+- peakCsLead - the largest amount of cs that a player had over the rest of the game
+- peakKillLead - If the player's team had the kill lead(maybe not sure)
+- picksWAlly - the number of pick kills you got with an ally. A pick is where you kill someone by themselves with no team near them. 
+- SoloKills - the number of kills you got without your team helping in the kill 
+- StealthWardsPlaced - the number of stealth wards placed 
+- TurretPlates(int) - the numbre of platings a player takes from turrets 
+- FirstBloodKill(bool) - If the player got first blood
+- FirstBloodAssists(bool) - If the player helped with first blood
+- FirstTowerKill(bool) - If the player took first tower 
+- Broken Fields
+    - DkeyUses
+    - Dkey 
+    - Fkey
+    - FkeyUses
+- HealOnTeamates(int) - the amount of healing a player has done to teamates
+- SheildOnTeamates(int) - the amount of shielding a player has done to teamates

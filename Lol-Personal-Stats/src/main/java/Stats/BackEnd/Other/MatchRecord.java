@@ -26,9 +26,6 @@ public class MatchRecord {
     List<ArrayList<MatchInterval>> intervals) {
         this.matchHistory = matchHistory;
         players = new ArrayList<>();
-        System.out.println(overal1.size());
-        System.out.println(overal2.size());
-        System.out.println(intervals.size());
         for(int i = 0; i < overal1.size();i++){
             players.add(new PlayerRecord(overal1.get(i),overal2.get(i),intervals.get(i)));
         }

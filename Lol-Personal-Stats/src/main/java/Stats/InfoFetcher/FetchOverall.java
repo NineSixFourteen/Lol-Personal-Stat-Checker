@@ -62,8 +62,8 @@ public class FetchOverall {
             chal.get("skillshotsHit").asInt(),
             chal.get("landSkillShotsEarlyGame").asInt()
         ).setCS(
-            chal.get("maxCsAdvantageOnLaneOpponent") != null ?  chal.get("maxCsAdvantageOnLaneOpponent").asInt() : 0,
-            chal.get("laneMinionsFirst10Minutes").asInt()
+            chal.get("laneMinionsFirst10Minutes").asInt(),
+            chal.get("maxCsAdvantageOnLaneOpponent") != null ?  chal.get("maxCsAdvantageOnLaneOpponent").asInt() : 0
         ).setKills(
             chal.get("maxKillDeficit").asInt(), 
             chal.get("soloKills").asInt(), 

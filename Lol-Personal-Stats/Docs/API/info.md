@@ -3,7 +3,6 @@ The API is responsible for returning the information that is stored in the datab
 
 # Table of Contents
   * [Front End](#front-end)
-    + [Links to more documentation about Front end](#links-to-more-documentation-about-front-end)
   * [Back End](#back-end)
     + [Tables](#tables)
     + [Builder and Other](#builder-and-other)
@@ -23,10 +22,8 @@ src\main\java\Stats\FetchSystem\Controllers\TestController.java
 ```
 The above code makes it so when someone goes to localhost:8080/ping the api will then return "pong" which if they are in a browser will return a webpage with just pong or if someones uses a tool like curl will just pring pong in the console. This is used to test if the server is running.
 
-### Links to more documentation about Front end
-- 1 
-- 2
-- 3
+For more see
+- 1 [Front End Info](./FrontEnd/info.md)
 
 ## Back End 
 The backend of the API is the MYSQL DataBase that all the information we get from the riot servers is stored.<br>
@@ -67,7 +64,7 @@ These are just classes that are used to for help building the objects that will 
 These are the classes that will interact with the riot api to retrieve the data you want to add to your database.
 
 To see more about them go to there own pages <br>
-[Fetcher](/Docs/API/InfoFetchers/) <br>
-[FetcherIntervals](/Docs/API/InfoFetchers/) <br>
-[FetcherMatchHistory](/Docs/API/InfoFetchers/) <br>
-[FetcherOverall](/Docs/API/InfoFetchers/) <br>
+[Fetcher](/Docs/API/InfoFetchers/Fetcher.md) <br>
+[FetcherIntervals](/Docs/API/InfoFetchers/FetcherInterval.md) <br>
+[FetcherMatchHistory](/Docs/API/InfoFetchers/FetcherHistory.md) <br>
+[FetcherOverall](/Docs/API/InfoFetchers/FetcherOverall.md) <br>

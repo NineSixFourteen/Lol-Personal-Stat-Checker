@@ -73,7 +73,7 @@ Documentation about this [file](../../../../src/main/java/Stats/FrontEnd/AverCon
 - getChampGames(name, champ)
     - Steps 
         - Find all Match data about the player in using overall1.findByName(name) and overall2.findByName(name)
-        - loop through all match records and add them to an a [averageMatch]() instance if they are playing the champion and seperate by if they are playing in ARAM or SR. 
+        - loop through all match records and add them to an a [averageMatch](../../BackEnd/Other.md) instance if they are playing the champion and seperate by if they are playing in ARAM or SR. 
             - They are playing ARAM if they don't have a position so if
             ```m1s.get(i).getPosition().trim().length() != 0 ``` <br> is true they are playing SR if false they are playing ARAM
         - Find average by using build()
@@ -81,21 +81,21 @@ Documentation about this [file](../../../../src/main/java/Stats/FrontEnd/AverCon
 - getPlayerPosition(name)
     - Steps 
         - Find all Match data about the player in using overall1.findByName(name) and overall2.findByName(name)
-        - prepare list of [averageMatch]() 
-        - look through all records and the data to [averageMatch]() depending on what position they are playing 
+        - prepare list of [averageMatch](../../BackEnd/Other.md) 
+        - look through all records and the data to [averageMatch](../../BackEnd/Other.md) depending on what position they are playing 
             - see getChampGames() to how see how gamemodes are detrmined
         - Find average by using build()
         - return Overall, SR, ARAM, Top,Jungle,Mid,Adc,Supp
 - getPlayerTeam(name)
     - Steps 
         - Find all the match ids a player has been in 
-        - prepare list of [averageMatch]() 
+        - prepare list of [averageMatch](../../BackEnd/Other.md) 
         - For every match they have been in 
             - Find all player records for that match
             - Find the team the player played in that match
             - Go through all records for that match
                 - if they are on players team but not the player 
-                    - add there data to an [averageMatch]() based on position 
+                    - add there data to an [averageMatch](../../BackEnd/Other.md) based on position 
                     - see getChampGames() to how see how gamemodes are detrmined 
         - Find average by using build()
         - Return Overall, SR, ARAM, Top,Jungle,Mid,Adc,Supp
@@ -113,7 +113,7 @@ Documentation about this [file](../../../../src/main/java/Stats/FrontEnd/AverCon
         - repeat for position and gms 
         - for all remaining records 
             - find corresponding match2 for every match1 
-            - add them to an [averageMatch]() 
+            - add them to an [averageMatch](../../BackEnd/Other.md) 
         - find average with build()
         - return average
 - getTeam(name, champion, postion, gamemodes, team, otherName, otherChampion, otherPosition, otherGamemodes)
@@ -124,7 +124,7 @@ Documentation about this [file](../../../../src/main/java/Stats/FrontEnd/AverCon
         - check if record is on the correct side 
             - if $team == false its other side of $name if true its the same side
         - check if record fits new filters 
-        - if it does add to an [averageMatch]() instance 
+        - if it does add to an [averageMatch](../../BackEnd/Other.md) instance 
     - find average with build()
     - return average
 
