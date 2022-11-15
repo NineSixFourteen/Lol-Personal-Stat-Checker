@@ -30,9 +30,7 @@ public class AddController {
 
     @GetMapping("/add/Match")
     public @ResponseBody String index(@RequestParam String id){
-        System.out.println(id);
         MatchRecord x = Fetcher.getMatchRecord(id);
-        System.out.println(x);
         if(x == null){
             return "Failed Game Not Found";
         }

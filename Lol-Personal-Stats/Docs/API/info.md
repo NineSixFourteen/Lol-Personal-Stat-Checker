@@ -7,10 +7,11 @@ The API is responsible for returning the information that is stored in the datab
   * [Back End](#back-end)
     + [Tables](#tables)
     + [Builder and Other](#builder-and-other)
+  * [Info Fetchers](#info-fetchers)
 
 
 ## Front End 
-The front end of the api i.e. the part the user interfaces with is built using Spring Boot and is responsible for listening on localhost:8080 for activity at specific urls where it takes information and then returns the correct information based on information in the url
+The front end of the api i.e. the part the user interacts with is built using Spring Boot and is responsible for listening on localhost:8080 for activity at specific urls where it takes information and then returns the correct information based on information in the url
 
 Examples <br>
 src\main\java\Stats\FetchSystem\Controllers\TestController.java
@@ -57,7 +58,16 @@ The tables used for storing data are
     <br>&emsp; of 15,20,25,30,35
 
 There is a matching class in the Entitys [folder](../../src/main/java/Stats/BackEnd/Entitys/) for each of there table that represent a record in these tables.<br>
-This is also a matching a matching class in the Repository [folder](../../src/main/java/Stats/BackEnd/Repository/) that represents the table in the database. These repositorys are CRUD repositorys that gives us the ability to Create, read,update and delete records from the table inside of our programs. See [Repository] for more info.
+This is also a matching a matching class in the Repository [folder](../../src/main/java/Stats/BackEnd/Repository/) that represents the table in the database. <br>These repositorys are CRUD repositorys that gives us the ability to Create, read,update and delete records from the table inside of our programs. See [Repository] for more info.
 
 ### Builder and Other 
 These are just classes that are used to for help building the objects that will become records in our tables and other contains potential ways we might want to represent the data to the user for example [AverageMatch](../../src/main/java/Stats/BackEnd/Other/AverageMatch.java) which is usefull when we want to get the average of stats for a match(it really does player data its not  named well #TODO).
+
+## Info Fetchers
+These are the classes that will interact with the riot api to retrieve the data you want to add to your database.
+
+To see more about them go to there own pages <br>
+[Fetcher](/Docs/API/InfoFetchers/) <br>
+[FetcherIntervals](/Docs/API/InfoFetchers/) <br>
+[FetcherMatchHistory](/Docs/API/InfoFetchers/) <br>
+[FetcherOverall](/Docs/API/InfoFetchers/) <br>

@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,17 +31,6 @@ public class DeleteController {
     @Autowired 
     MatchHistoryRespository history;
     
-    @PostMapping("/delete/ov1")
-    public @ResponseBody String delete1(@RequestParam int id){
-        overall1.deleteById(id);
-        return "id has been deleted";
-    }
-    @PostMapping("/delete/ov2")
-    public @ResponseBody String delete2(@RequestParam int id){
-        overall2.deleteById(id);
-        return "id has been deleted";
-    }
-
     @GetMapping("/delete/Match")
     public @ResponseBody String deleteMatch(@RequestParam String id){
         System.out.println("Deleting " +id)  ;
@@ -104,6 +92,7 @@ public class DeleteController {
             }
         }
     }
+
     public boolean saveGame(String id){
         MatchRecord x = Fetcher.getMatchRecord(id);
         if(x == null){

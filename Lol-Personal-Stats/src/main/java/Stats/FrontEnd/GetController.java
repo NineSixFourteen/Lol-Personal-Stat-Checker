@@ -38,7 +38,7 @@ public class GetController {
     MatchHistoryRespository history;
     
     @GetMapping("/get/Player/matches")
-    public @ResponseBody List<MatchRecord> getPlayerLast10(
+    public @ResponseBody List<MatchRecord> getPlayerHis(
         @RequestParam(name = "name", required = true) String name,
         @RequestParam(name = "filterType", required = false, defaultValue = "-1") String type,
         @RequestParam(name = "filter", required = false, defaultValue = "") String f )
@@ -91,7 +91,7 @@ public class GetController {
     }
 
     @GetMapping("/get/Champ/topChamps")
-    public @ResponseBody HashMap<String,Integer> getChampTop5(
+    public @ResponseBody HashMap<String,Integer> getTopChamps(
         @RequestParam(name = "name", required = false, defaultValue = "") String name )
     {
         HashMap<String,Integer> champCount = new HashMap<>();

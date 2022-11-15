@@ -23,22 +23,6 @@ public class TestController {
     @Autowired 
     MatchHistoryRespository history;
 
-    @GetMapping("/testPlayer")
-    public @ResponseBody String test(
-        @RequestParam(name = "id", required = false, defaultValue = "") String id,
-        @RequestParam(name = "name", required = false, defaultValue = "") String name )
-    {
-        boolean foundH = history.findByMatchID(id).size() < 1;
-        boolean found1 = overall1.findByMatchIDAndName(id, name).size() < 1;
-        boolean found2 = overall2.findByMatchIDAndName(id, name).size() < 1;
-        //boolean foundIs = match.findByMatchIDAndName(id, name) != null;
-        return "Name : " + name + " ID : " + id + "\n" + 
-            "Found History : " + foundH  + "\n" + 
-            "Found Overall1 : " + found1  + "\n" + 
-            "Found Overall2 : " + found2  + "\n" + 
-            "Found Intervals : " + false  + "\n";
-    }
-
     @GetMapping("/ping")
     public @ResponseBody String ping(){
         System.out.println("ping");
