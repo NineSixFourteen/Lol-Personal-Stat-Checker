@@ -7,7 +7,7 @@ import Jungle from "../../photos/Jungle.png"
 import Mid from "../../photos/Mid.png"
 import Bot from "../../photos/Bot.png"
 import Support from "../../photos/Support.png"
-import Question from "../../photos/Question.png"
+import Question from "../../photos/ARAM.png"
 
 class PlayerTop extends React.Component {
     constructor(props) {
@@ -33,6 +33,7 @@ class PlayerTop extends React.Component {
             return "white";
         }
     }
+
     getPosition(pos){
       console.log(pos)
       if(pos == "TOP"){
@@ -56,7 +57,6 @@ class PlayerTop extends React.Component {
   
     render() {
       const match1 = this.state.player.mo.match1;
-      const match2 = this.state.player.mo.match2;
       return (
         <Card style={{background:this.getBg(match1.team), color:this.getFont(match1.team), fontWeight:"500"}}>
             <Card.Body>
